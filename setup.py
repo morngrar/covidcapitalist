@@ -23,7 +23,7 @@ setup(
     packages=find_packages(include=['viraltycoon', 'viraltycoon.*']),
     include_package_data=True,
     install_requires=[
-        "pygame",
+        "pygame>=1.9.6",
     ],
     zip_safe=False
 )
