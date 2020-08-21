@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(
-    name='viraltycoon',
+    name='covidcapitalist',
     version='0.1.0',
     description='Tycoon game based on the COVID-19 pandemic',
     long_description=readme(),
@@ -17,10 +17,10 @@ setup(
     license='MIT',
     entry_points = {
         "console_scripts" : [
-            "viraltycoon=viraltycoon.cmd:main",
+            "covidcapitalist=covidcapitalist.cmd:main",
         ],
     },
-    packages=find_packages(include=['viraltycoon', 'viraltycoon.*']),
+    packages=find_packages(include=['covidcapitalist', 'covidcapitalist.*']),
     include_package_data=True,
     install_requires=[
         "pygame>=1.9.6",
