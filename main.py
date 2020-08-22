@@ -1,7 +1,7 @@
 import pygame
 
 from hello import hello, event_glob_test
-from warehouse import checkWarehouse
+from warehouse import checkWarehouse, increaseDemand
 from eventsystem import EventStream
 
 # global variables
@@ -11,29 +11,29 @@ game_data = {
     "cash" : 1000,
 
     #stock
-    "masks stock" : 0,
-    "gloves stock" : 0,
+    "mask stock" : 0,
+    "glove stock" : 0,
     "antibac stock" : 0,
-    "visirs stock" : 0,
-    "ventilators stock" : 0,
+    "visir stock" : 0,
+    "ventilator stock" : 0,
     "toilet-paper stock" : 1,
 
 
     #demand
-    "masks demand" : 10,
-    "gloves demand" : 10,
+    "mask demand" : 10,
+    "glove demand" : 10,
     "antibac demand" : 10,
-    "visirs demand" : 10,
-    "ventilators demand" : 10,
+    "visir demand" : 10,
+    "ventilator demand" : 10,
     "toilet-paper demand" : 1,
 
 
     #price
-    "masks price" : 5,
-    "gloves price" : 5,
-    "antibac price" : 20,
-    "visirs price" : 25,
-    "ventilators price" : 300,
+    "mask price" : 5,
+    "glove price" : 5,
+    "antibac price" : 25,
+    "visir price" : 10,
+    "ventilator price" : 300,
     "toilet-paper price" : 10,
 
 
@@ -71,6 +71,8 @@ def main():
 
     pygame.display.set_caption("COVID Capitalist")
 
+    increaseDemand(game_data)
+
     running = True
     while running:
         for event in pygame.event.get():
@@ -78,9 +80,10 @@ def main():
                 running = False
 
         
-
-    
         
+        
+
+
 
 if __name__=="__main__":
     hello()
