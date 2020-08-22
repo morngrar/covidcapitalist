@@ -75,7 +75,20 @@ def main():
     )
 
     pygame.display.set_caption("COVID Capitalist")
-    pygame.display.update()
+
+
+    from ui.window import Window
+    window = Window(
+        screen, 
+        SCREEN_WIDTH, 
+        SCREEN_HEIGHT,
+
+        # font sizes
+        {
+            "events":EVENT_FONT_SIZE,
+        }
+    )
+
 
     running = True
     while running:
@@ -109,9 +122,12 @@ def main():
             event = market_events.pick_event()
             if event:
                 if eventsystem.update_game_data(event, game_data):
-                    print(event.text)
+                    window.add_event(event)
 
         produce(game_data)
+        
+        window.draw()
+        pygame.display.update()
 
 if __name__=="__main__":
     main()

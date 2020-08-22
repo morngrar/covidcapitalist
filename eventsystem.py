@@ -4,7 +4,7 @@ import random
 import time
 
 NOTHING_CHANCE = 3
-EVENT_INTERVAL = 5   # value in seconds
+EVENT_INTERVAL = 1   # value in seconds
 
 class Event:
     def __init__(self, text, data):
