@@ -32,7 +32,36 @@ class EventStream:
                     "mask factories" : -1,
                 }
             ),
-
+            Event(
+                "Some gloves got lost in transport!",
+                {
+                    "glove stock" : -50,
+                }
+            ),
+            Event(
+                "Some masks got lost in transport!",
+                {
+                    "mask stock" : -100,
+                }
+            ),
+            Event(
+                "Some antibac got lost in transport!",
+                {
+                    "antibac stock" : -25,
+                }
+            ),
+            Event(
+                "Some visirs got lost in transport!",
+                {
+                    "visir stock" : -30,
+                }
+            ),
+            Event(
+                "A ventilator was replaced by warranty!",
+                {
+                    "ventilator stock" : -1,
+                }
+            )
         ]
 
         # actual initial events
