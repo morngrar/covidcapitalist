@@ -1,9 +1,9 @@
 import pygame
 
-from eventsystem import EventStream
+import eventsystem
 
 # global variables
-market_events = EventStream()
+market_events = eventsystem.EventStream()
 game_data = {
     "renown" : 50,
     "cash" : 1000,
@@ -15,6 +15,14 @@ game_data = {
     "visirs stock" : 0,
     "ventilators stock" : 0,
     "toilet-paper stock" : 0,
+
+    # demand
+    "masks demand" : 0,
+    "gloves demand" : 0,
+    "antibac demand" : 0,
+    "visirs demand" : 0,
+    "ventilators demand" : 0,
+    "toilet-paper demand" : 0,
 
     # factories
     "mask factories" : 0,
@@ -53,6 +61,20 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    print(game_data)
+                elif event.key == pygame.K_f:
+                    # increment all factories by one on f-keypress
+                    factories = [key for key in game_data.keys() if "factories" in key]
+                    for k in factories:
+                        game_data[k] += 1
+        
+        if market_events.time_for_event():
+            event = market_events.pick_event()
+            if event:
+                print(event.text)
+                eventsystem.update_game_data(event, game_data)
 
 
 if __name__=="__main__":

@@ -18,6 +18,23 @@ class EventStream:
         # 'nothing happens' events
         self.events = [None for e in range(NOTHING_CHANCE)]
 
+        # built-in events
+        self.events += [
+            Event(
+                "A toilet-paper warehouse in Tulpa burned down!",
+                {
+                    "toilet-paper demand" : 2000,
+                }
+            ),
+            Event(
+                "One of your mask factories was destroyed during a conspiracy-theorist attack!",
+                {
+                    "mask factories" : -1,
+                }
+            ),
+
+        ]
+
         # actual initial events
         if events:
             self.events += events
