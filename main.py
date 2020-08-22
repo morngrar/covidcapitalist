@@ -1,10 +1,7 @@
-import pygame
 import time
-
-from hello import hello, event_glob_test
+import pygame
 from warehouse import checkWarehouse, increaseDemand
-from eventsystem import EventStream
-from productionsystem import add_factory, produce
+from productionsystem import produce
 import eventsystem
 
 
@@ -58,7 +55,7 @@ game_data = {
 def main():
     """The games main loop"""
 
-    HIDPI = True
+    HIDPI = False
     SCREEN_WIDTH = 1920
     SCREEN_HEIGHT = 1280
     EVENT_FONT_SIZE = 16
