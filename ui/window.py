@@ -38,11 +38,11 @@ class Window:
         self.infobar_height = height // 29
         self.info_pad = (self.infobar_height - fontsizes["info"]) // 2
         self.infobar_surface = pygame.Surface((self.left_width, self.infobar_height))
-        infobar_width = self.left_width // 4
-        self.infobar_renown_rect = pygame.Rect(self.info_pad, self.info_pad, infobar_width, self.infobar_height)
+        renown_width = self.left_width // 4
+        self.infobar_renown_rect = pygame.Rect(self.info_pad, self.info_pad, renown_width, self.infobar_height)
         self.infobar_cash_rect = pygame.Rect(
             (
-                infobar_width,
+                renown_width,
                 self.info_pad, 
                 self.left_width - (self.left_width // 4),
                 self.infobar_height
