@@ -1,6 +1,7 @@
 import pygame
 
 from hello import hello, event_glob_test
+from warehouse import checkWarehouse
 from eventsystem import EventStream
 
 # global variables
@@ -10,12 +11,31 @@ game_data = {
     "cash" : 1000,
 
     #stock
-    "masks" : 0,
-    "gloves" : 0,
-    "antibac" : 0,
-    "visirs" : 0,
-    "ventilators" : 0,
-    "toilet paper" : 0,
+    "masks stock" : 0,
+    "gloves stock" : 0,
+    "antibac stock" : 0,
+    "visirs stock" : 0,
+    "ventilators stock" : 0,
+    "toilet-paper stock" : 1,
+
+
+    #demand
+    "masks demand" : 10,
+    "gloves demand" : 10,
+    "antibac demand" : 10,
+    "visirs demand" : 10,
+    "ventilators demand" : 10,
+    "toilet-paper demand" : 1,
+
+
+    #price
+    "masks price" : 5,
+    "gloves price" : 5,
+    "antibac price" : 20,
+    "visirs price" : 25,
+    "ventilators price" : 300,
+    "toilet paper price" : 10,
+
 
     # factories
     "mask factories" : 0,
@@ -57,6 +77,10 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
+        
+
+    
+        
 
 if __name__=="__main__":
     hello()
