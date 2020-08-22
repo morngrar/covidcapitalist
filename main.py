@@ -1,7 +1,16 @@
 import pygame
 
+from hello import hello, event_glob_test
+from warehouse import checkWarehouse, increaseDemand
+from eventsystem import EventStream
 from productionsystem import add_factory, produce
 import eventsystem
+
+import time
+
+deltatime = 0
+last_time = 0
+
 
 # global variables
 market_events = eventsystem.EventStream()
@@ -24,6 +33,14 @@ game_data = {
     "visir demand" : 0,
     "ventilator demand" : 0,
     "toilet-paper demand" : 0,
+
+    #price
+    "mask price" : 0,
+    "glove price" : 0,
+    "antibac price" : 0,
+    "visir price" : 0,
+    "ventilator price" : 0,
+    "toilet-paper price" : 0,
 
     # factories
     "mask factories" : 0,
@@ -62,6 +79,19 @@ def main():
 
     running = True
     while running:
+        global deltatime
+        global last_time
+        now = time.time()
+        deltatime += now - last_time
+        last_time = now
+
+        # Increase demand and sell stock in intervals
+        if deltatime >= 1:
+            checkWarehouse(game_data)
+        if deltatime >= 3:
+            deltatime = 0
+            increaseDemand(game_data)               
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
