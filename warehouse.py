@@ -39,7 +39,6 @@ def checkWarehouse(gameData):
         # If there is a demand and item is in stock
         if gameData[item + " demand"] > 0 and gameData[item + " stock"] > 0:
 
-            print("OLDSTOCK", gameData[item + " stock"])
             # Increase income, subtract items sold from demand and stock
             demand = gameData[item + ' demand'] 
             stock = gameData[item + ' stock']
@@ -53,7 +52,6 @@ def checkWarehouse(gameData):
             gameData['cash'] += (quantitySold * gameData[item + " price"])
             gameData[item + ' demand'] -= quantitySold
             gameData[item + " stock"] -= quantitySold
-            print("NEWSTOCK", gameData[item + " stock"])
 
 
 
