@@ -1,5 +1,8 @@
 """System for production"""
 
+import time
+
+
 # How much each factory costs to build
 factory_cost = {
     "mask factories": 100,
@@ -28,3 +31,16 @@ def add_factory(game_data, factory):
         return True
     else:
         return False
+
+
+def produce(game_data):
+    global deltatime
+    now = time.time()
+    last_time = now
+    deltatime += now - last_time
+    print("DELTA: ", deltatime)
+    print("NOW: ", now)
+
+    if deltatime >= 1:
+        print(deltatime)
+        deltatime = 0
