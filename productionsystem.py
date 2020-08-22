@@ -2,6 +2,8 @@
 
 import time
 
+deltatime = 0
+last_time = 0
 
 # How much each factory costs to build
 factory_cost = {
@@ -35,9 +37,10 @@ def add_factory(game_data, factory):
 
 def produce(game_data):
     global deltatime
+    global last_time
     now = time.time()
-    last_time = now
     deltatime += now - last_time
+    last_time = now
     print("DELTA: ", deltatime)
     print("NOW: ", now)
 
