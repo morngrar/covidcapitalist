@@ -5,7 +5,7 @@ import random
 class EventStream:
     def __init__(self, events = None):
         # 'nothing happens' events
-        self.events = [None for e in range(30)]
+        self.events = [None for e in range(3)]
 
         # actual initial events
         if events:

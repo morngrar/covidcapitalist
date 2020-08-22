@@ -1,7 +1,10 @@
 import pygame
 
-from hello import hello
+from hello import hello, event_glob_test
+from eventsystem import EventStream
 
+# global event variable
+market_events = EventStream()
 
 def main():
     """The games main loop
@@ -33,4 +36,8 @@ def main():
 
 if __name__=="__main__":
     hello()
+    print(market_events.events)
+    event_glob_test(market_events)  # changes global, since python passes by ref
+    print(market_events.events)
+
     main()
