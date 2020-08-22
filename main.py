@@ -2,7 +2,7 @@ import pygame
 
 from productionsystem import add_factory, produce
 import eventsystem
-from widgets import Widget
+from widgets import *
 
 # global variables
 market_events = eventsystem.EventStream()
@@ -84,8 +84,11 @@ def main():
 
         produce(game_data)
 
-        widget1 = Widget((200, 300, 100, 50))
-        widget1.draw(screen, (250, 250))
+        maskfactory = Factorywidget((10, 10, 300, 100))
+        maskfactory.draw(screen, (150, 500))
+
+        glovefactory = Factorywidget((10, 10, 300, 100))
+        glovefactory.draw(screen, (150, 650))
 
         pygame.display.update()
 
