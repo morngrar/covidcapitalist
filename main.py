@@ -55,7 +55,7 @@ game_data = {
 def main():
     """The games main loop"""
 
-    HIDPI = True
+    HIDPI = False
     SCREEN_WIDTH = 1920
     SCREEN_HEIGHT = 1280
     EVENT_FONT_SIZE = 16

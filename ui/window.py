@@ -35,7 +35,7 @@ class Window:
             'freesansbold.ttf',
             fontsizes["info"]
         )
-        self.infobar_height = height // 19
+        self.infobar_height = height // 29
         self.info_pad = (self.infobar_height - fontsizes["info"]) // 2
         self.infobar_surface = pygame.Surface((self.left_width, self.infobar_height))
         infobar_width = self.left_width // 4
