@@ -1,8 +1,17 @@
 import pygame
 
+from hello import hello, event_glob_test
+from warehouse import checkWarehouse, increaseDemand
+from eventsystem import EventStream
 from productionsystem import add_factory, produce
 import eventsystem
-from widgets import *
+from ui.factory import FactoryBox
+
+import time
+
+deltatime = 0
+last_time = 0
+
 
 # global variables
 market_events = eventsystem.EventStream()
@@ -25,6 +34,14 @@ game_data = {
     "visir demand" : 0,
     "ventilator demand" : 0,
     "toilet-paper demand" : 0,
+
+    #price
+    "mask price" : 0,
+    "glove price" : 0,
+    "antibac price" : 0,
+    "visir price" : 0,
+    "ventilator price" : 0,
+    "toilet-paper price" : 0,
 
     # factories
     "mask factories" : 0,
@@ -59,10 +76,36 @@ def main():
     )
 
     pygame.display.set_caption("COVID Capitalist")
-    
+
+
+    from ui.window import Window
+    window = Window(
+        screen, 
+        SCREEN_WIDTH, 
+        SCREEN_HEIGHT,
+
+        # font sizes
+        {
+            "events":EVENT_FONT_SIZE,
+        }
+    )
+
 
     running = True
     while running:
+        global deltatime
+        global last_time
+        now = time.time()
+        deltatime += now - last_time
+        last_time = now
+
+        # Increase demand and sell stock in intervals
+        if deltatime >= 1:
+            checkWarehouse(game_data)
+        if deltatime >= 3:
+            deltatime = 0
+            increaseDemand(game_data)               
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -80,16 +123,15 @@ def main():
             event = market_events.pick_event()
             if event:
                 if eventsystem.update_game_data(event, game_data):
-                    print(event.text)
+                    window.add_event(event)
 
         produce(game_data)
+        
+        factory1 = FactoryBox((1, 1, (50, 50)))
+        factory1.draw(screen, (50, 50))
 
-        maskfactory = Factorywidget((10, 10, 300, 100))
-        maskfactory.draw(screen, (150, 500))
 
-        glovefactory = Factorywidget((10, 10, 300, 100))
-        glovefactory.draw(screen, (150, 650))
-
+        window.draw()
         pygame.display.update()
 
 if __name__=="__main__":
