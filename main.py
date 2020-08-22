@@ -1,4 +1,5 @@
 import pygame
+import time
 
 from hello import hello, event_glob_test
 from warehouse import checkWarehouse, increaseDemand
@@ -6,7 +7,6 @@ from eventsystem import EventStream
 from productionsystem import add_factory, produce
 import eventsystem
 
-import time
 
 deltatime = 0
 last_time = 0
@@ -58,7 +58,7 @@ game_data = {
 def main():
     """The games main loop"""
 
-    HIDPI = False
+    HIDPI = True
     SCREEN_WIDTH = 1920
     SCREEN_HEIGHT = 1280
     EVENT_FONT_SIZE = 16
@@ -86,6 +86,7 @@ def main():
         # font sizes
         {
             "events":EVENT_FONT_SIZE,
+            "info": int(EVENT_FONT_SIZE * 1.8),
         }
     )
 
@@ -125,7 +126,7 @@ def main():
                     window.add_event(event)
 
         produce(game_data)
-        
+        window.update_gamedata(game_data)
         window.draw()
         pygame.display.update()
 
