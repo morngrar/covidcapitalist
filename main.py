@@ -11,12 +11,12 @@ game_data = {
     "cash" : 1000,
 
     #stock
-    "masks" : 0,
-    "gloves" : 0,
-    "antibac" : 0,
-    "visirs" : 0,
-    "ventilators" : 0,
-    "toilet paper" : 0,
+    "masks stock" : 0,
+    "gloves stock" : 0,
+    "antibac stock" : 0,
+    "visirs stock" : 0,
+    "ventilators stock" : 0,
+    "toilet-paper stock" : 0,
 
     # factories
     "mask factories" : 0,
@@ -64,7 +64,7 @@ if __name__=="__main__":
     print(market_events.events)
     event_glob_test(market_events)  # changes global, since python passes by ref
     print(market_events.events)
-    add_factory(game_data, "ventilators")
+    add_factory(game_data, "visir factories")
     print(game_data)
 
     main()
