@@ -2,6 +2,7 @@ import pygame
 
 from hello import hello, event_glob_test
 from eventsystem import EventStream
+from productionsystem import add_factory
 
 # global variables
 market_events = EventStream()
@@ -63,5 +64,7 @@ if __name__=="__main__":
     print(market_events.events)
     event_glob_test(market_events)  # changes global, since python passes by ref
     print(market_events.events)
+    add_factory(game_data, "ventilators")
+    print(game_data)
 
     main()
