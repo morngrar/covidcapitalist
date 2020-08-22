@@ -4,6 +4,8 @@ from ui import colors
 
 BG_COLOR = (50, 50, 50)
 BORDER_COLOR = (100, 100, 100)
+FACTORY_XPAD = 10
+FACTORY_YPAD = 10
 
 
 class FactoryBox:
@@ -26,20 +28,38 @@ class FactoryBox:
             raise ValueError("Factory must have position")
 
         rect = pygame.Rect((0, 0), (self.dimensions))
-        row_height = rect.height // 3
+        inner = pygame.Rect(
+            (0, 0, rect.width-FACTORY_XPAD, rect.height-FACTORY_YPAD)
+        )
+
+        inner.clamp_ip(rect)
+        inner.x += FACTORY_XPAD // 2
+        inner.y += FACTORY_YPAD // 2
+
+        text_box = pygame.Rect(
+            (0, 0, rect.width-FACTORY_XPAD * 2, rect.height-FACTORY_YPAD * 2)
+        )
+
+        text_box.clamp_ip(rect)
+        text_box.x += FACTORY_XPAD
+        text_box.y += FACTORY_YPAD
+
+        row_height = text_box.height // 3
         title_box = pygame.Rect(
-            (0, 0, rect.width, row_height)
+            (FACTORY_XPAD, FACTORY_YPAD, text_box.width, row_height)
         )
 
         production_box = pygame.Rect(
-            (0, row_height, rect.width, row_height)
+            (FACTORY_XPAD, row_height + FACTORY_YPAD, text_box.width, row_height)
         )
 
         cost_box = pygame.Rect(
-            (0, row_height * 2, rect.width, row_height)
+            (FACTORY_XPAD, row_height * 2 + FACTORY_YPAD, text_box.width, row_height)
         )
 
-        pygame.draw.rect(self.surface, BG_COLOR, rect)
+        pygame.draw.rect(self.surface, colors.WHITE, rect)
+        pygame.draw.rect(self.surface, BG_COLOR, inner)
+
         textwrap.draw_text(
             self.surface, 
             self.title, 
