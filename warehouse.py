@@ -23,7 +23,6 @@ def increaseDemand(gameData):
     
         newInt = round(newFloat)
         gameData[demand] += newInt
-        print("NEW DEMAND FOR ", demand, gameData[demand])
       
         
 
