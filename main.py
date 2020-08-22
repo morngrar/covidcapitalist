@@ -1,10 +1,7 @@
-import pygame
 import time
-
-from hello import hello, event_glob_test
+import pygame
 from warehouse import checkWarehouse, increaseDemand
-from eventsystem import EventStream
-from productionsystem import add_factory, produce
+from productionsystem import produce
 import eventsystem
 
 
