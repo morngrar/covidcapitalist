@@ -3,8 +3,32 @@ import pygame
 from hello import hello, event_glob_test
 from eventsystem import EventStream
 
-# global event variable
+# global variables
 market_events = EventStream()
+game_data = {
+    "renown" : 50,
+    "cash" : 1000,
+
+    #stock
+    "masks" : 0,
+    "gloves" : 0,
+    "antibac" : 0,
+    "visirs" : 0,
+    "ventilators" : 0,
+    "toilet paper" : 0,
+
+    # factories
+    "mask factories" : 0,
+    "glove factories" : 0,
+    "antibac factories" : 0,
+    "visir factories" : 0,
+    "ventilator factories" : 0,
+    "tp factories" : 0,
+
+
+    # off the books production
+    "moonshine producers" : 0,
+}
 
 def main():
     """The games main loop
