@@ -58,7 +58,7 @@ game_data = {
 def main():
     """The games main loop"""
 
-    HIDPI = True
+    HIDPI = False
     SCREEN_WIDTH = 1920
     SCREEN_HEIGHT = 1280
     EVENT_FONT_SIZE = 16
@@ -108,11 +108,10 @@ def main():
         if market_events.time_for_event():
             event = market_events.pick_event()
             if event:
-                print(event.text)
-                eventsystem.update_game_data(event, game_data)
+                if eventsystem.update_game_data(event, game_data):
+                    print(event.text)
 
         produce(game_data)
 
 if __name__=="__main__":
-    add_factory(game_data, "mask factories")
     main()
