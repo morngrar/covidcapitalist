@@ -42,22 +42,30 @@ class Window:
         self.infobar_renown_rect = pygame.Rect(self.info_pad, self.info_pad, renown_width, self.infobar_height)
         self.infobar_cash_rect = pygame.Rect(
             (
-                renown_width,
-                self.info_pad, 
-                self.left_width - (self.left_width // 4),
-                self.infobar_height
+                renown_width,                               # X
+                self.info_pad,                              # Y
+                self.left_width - (self.left_width // 4),   # Width
+                self.infobar_height                         # Height
             )
         )
 
-        # stock area
-        self.stock_height = (height - (height//19)) // 2
-        self.stock_width = width - self.event_width
+        # Stock area
+        self.stock_height = (self.height - self.infobar_height) // 2
+        self.stock_width = self.left_width
+
         self.stock_font = pygame.font.Font(
             'freesansbold.ttf',
             fontsizes['stock']
         )
-        self.stock_surface = pygame.Surface(self.stock_width, self.stock_height)
-        self.stock_pos = (height + (height//19), 0)
+        self.stock_title_font = pygame.font.Font(
+            'freesansbold.ttf',
+            fontsizes['title']
+        )
+        self.stock_surface = pygame.Surface((self.stock_width,self.stock_height))
+        self.stock_title_rect = pygame.Rect(
+            self.info_pad, self.info_pad, self.left_width, self.infobar_height * 2
+        )
+        
 
     def add_event(self, event):
         self.event_list.append(
@@ -93,7 +101,7 @@ class Window:
             self.event_list[i].pos = (0, self.event_height*i)
             self.event_list[i].draw()
         self.screen.blit(self.event_surface, self.event_surface_pos)
-        self.screen.blit(self.stock_surface, self.stock_surface_pos)
+      
 
         # info bar
         self.infobar_surface.fill(colors.DARK_GRAY)
@@ -103,6 +111,18 @@ class Window:
         else:
             renown = f"Renown: {self.game_data['renown']}%"
             cash = f"Cash: ${self.game_data['cash']}"
+
+        # Stock box
+        self.stock_surface.fill(colors.DARK_GRAY)
+        
+        stockTitle = "WAREHOUSE STOCK"
+        textwrap.draw_text(
+            self.stock_surface,
+            stockTitle,
+            colors.WHITE,
+            self.stock_title_rect,
+            self.stock_title_font
+        )
 
         textwrap.draw_text(
             self.infobar_surface, 
@@ -119,5 +139,6 @@ class Window:
             self.infobar_cash_rect,
             self.info_font,
         )
-        self.screen.blit(self.infobar_surface, (0, 0))
 
+        self.screen.blit(self.stock_surface, (0,0))
+        self.screen.blit(self.infobar_surface, (0, 0))
