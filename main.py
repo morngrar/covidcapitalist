@@ -41,20 +41,29 @@ def main():
     """The games main loop"""
 
     HIDPI = True
-    SCREEN_WIDTH = 800
-    SCREEN_HEIGHT = 600
+    SCREEN_WIDTH = 1920
+    SCREEN_HEIGHT = 1280
+    EVENT_FONT_SIZE = 16
 
     pygame.init()
 
     if HIDPI:
         SCREEN_HEIGHT *= 2
         SCREEN_WIDTH *= 2
+        EVENT_FONT_SIZE *= 2
 
     screen = pygame.display.set_mode(
         (SCREEN_WIDTH, SCREEN_HEIGHT)
     )
 
     pygame.display.set_caption("COVID Capitalist")
+
+    from textwraptest import drawText
+    font = pygame.font.Font('freesansbold.ttf', EVENT_FONT_SIZE)
+    text_box = (50, 100, 200, 500)
+    pygame.draw.rect(screen, (50, 50, 50), pygame.Rect(text_box))
+    drawText(screen, "Testing drawing some text", (255,255,255), text_box, font)
+    pygame.display.update()
 
     running = True
     while running:
