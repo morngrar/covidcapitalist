@@ -2,6 +2,7 @@ import pygame
 
 from productionsystem import add_factory, produce
 import eventsystem
+from widgets import Widget
 
 # global variables
 market_events = eventsystem.EventStream()
@@ -58,7 +59,7 @@ def main():
     )
 
     pygame.display.set_caption("COVID Capitalist")
-    pygame.display.update()
+    
 
     running = True
     while running:
@@ -82,6 +83,11 @@ def main():
                     print(event.text)
 
         produce(game_data)
+
+        widget1 = Widget((200, 300, 100, 50))
+        widget1.draw(screen, (250, 250))
+
+        pygame.display.update()
 
 if __name__=="__main__":
     main()
