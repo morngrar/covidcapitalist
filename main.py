@@ -34,7 +34,7 @@ game_data = {
     "antibac price" : 20,
     "visirs price" : 25,
     "ventilators price" : 300,
-    "toilet paper price" : 10,
+    "toilet-paper price" : 10,
 
 
     # factories

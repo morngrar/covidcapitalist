@@ -13,14 +13,11 @@ def checkWarehouse(gameData):
 
                             # If the demand is equal to or less than the stock
         if gameData[item + " stock"] >= gameData[item + " demand"]:
-            #sellMerch
-            print("ja, vi kan selge " + item)
+            # Sell merchandise
+            gameData['cash'] += (gameData[item + " stock"]*gameData[item + " price"])
+            gameData[item + ' demand'] -= gameData[item + ' demand']
+            gameData[item + " stock"] -= gameData[item + ' demand']
 
-
-# Function reduces your stock and increases the revenue
-def sellMerch(stock, price, revenue):
-    revenue += (stock*price)
-    stock -= stock
 
 
 
