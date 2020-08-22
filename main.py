@@ -121,9 +121,8 @@ def main():
         if market_events.time_for_event():
             event = market_events.pick_event()
             if event:
-                eventsystem.update_game_data(event, game_data)
-                window.add_event(event)
-                
+                if eventsystem.update_game_data(event, game_data):
+                    window.add_event(event)
 
         produce(game_data)
         
@@ -131,5 +130,4 @@ def main():
         pygame.display.update()
 
 if __name__=="__main__":
-    add_factory(game_data, "mask factories")
     main()
