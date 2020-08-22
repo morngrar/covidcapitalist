@@ -40,7 +40,7 @@ game_data = {
 def main():
     """The games main loop"""
 
-    HIDPI = True
+    HIDPI = False
     SCREEN_WIDTH = 1920
     SCREEN_HEIGHT = 1280
     EVENT_FONT_SIZE = 16
@@ -58,12 +58,19 @@ def main():
 
     pygame.display.set_caption("COVID Capitalist")
 
-    from textwraptest import drawText
-    font = pygame.font.Font('freesansbold.ttf', EVENT_FONT_SIZE)
-    text_box = (50, 100, 200, 500)
-    pygame.draw.rect(screen, (50, 50, 50), pygame.Rect(text_box))
-    drawText(screen, "Testing drawing some text", (255,255,255), text_box, font)
-    pygame.display.update()
+
+    from ui.window import Window
+    window = Window(
+        screen, 
+        SCREEN_WIDTH, 
+        SCREEN_HEIGHT,
+
+        # font sizes
+        {
+            "events":EVENT_FONT_SIZE,
+        }
+    )
+
 
     running = True
     while running:
@@ -82,9 +89,12 @@ def main():
         if market_events.time_for_event():
             event = market_events.pick_event()
             if event:
-                print(event.text)
                 eventsystem.update_game_data(event, game_data)
+                window.add_event(event)
+                
+        window.draw()
 
+        pygame.display.update()
 
 if __name__=="__main__":
     main()
