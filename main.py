@@ -84,5 +84,4 @@ def main():
         produce(game_data)
 
 if __name__=="__main__":
-    add_factory(game_data, "mask factories")
     main()
