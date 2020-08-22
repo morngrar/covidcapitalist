@@ -24,6 +24,14 @@ class Window:
         self.oldest_event = None
 
         # stock area
+        self.stock_height = (height - (height//19)) // 2
+        self.stock_width = width - self.event_width
+        self.stock_font = pygame.font.Font(
+            'freesansbold.ttf',
+            fontsizes['stock']
+        )
+        self.stock_surface = pygame.Surface(self.stock_width, self.stock_height)
+        self.stock_pos = (height + (height//19), 0)
 
     def add_event(self, event):
         self.event_list.append(
@@ -54,6 +62,7 @@ class Window:
             self.event_list[i].draw()
 
         self.screen.blit(self.event_surface, self.event_surface_pos)
+        self.screen.blit(self.stock_surface, self.stock_surface_pos)
 
 
 

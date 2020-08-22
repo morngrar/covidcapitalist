@@ -33,6 +33,12 @@ class EventStream:
                 }
             ),
             Event(
+                "Your great great aunt passed away! She left you a small fortune",
+                {
+                    "cash" : 10000,
+                }
+            ),
+            Event(
                 "Some gloves got lost in transport!",
                 {
                     "glove stock" : -50,
