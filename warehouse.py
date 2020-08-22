@@ -17,31 +17,43 @@ def increaseDemand(gameData):
         if price > 25:
             newDemandPercentage /= 2
         # Increase the demand
+        if gameData[demand] < 1:
+            gameData[demand] += 1
         newFloat = gameData[demand] * newDemandPercentage
+    
         newInt = round(newFloat)
         gameData[demand] += newInt
+        print("NEW DEMAND FOR ", demand, gameData[demand])
+      
         
-        
-
-
-        
-
 
 # Check if stock is equal to demand
 def checkWarehouse(gameData):
     stock_keys = [key for key in gameData.keys() if 'stock' in key]
     demand_keys = [key for key in gameData.keys() if 'demand' in key]
-    
+
     # Iterate through the demand and stock and evaluate
     for i in stock_keys:    # Get the item name
         item = i.split(" ")[0]
 
-                            # If the demand is equal to or less than the stock
-        if gameData[item + " stock"] >= gameData[item + " demand"]:
-            # Sell merchandise
-            gameData['cash'] += (gameData[item + " stock"]*gameData[item + " price"])
-            gameData[item + ' demand'] -= gameData[item + ' demand']
-            gameData[item + " stock"] -= gameData[item + ' demand']
+        # If there is a demand and item is in stock
+        if gameData[item + " demand"] > 0 and gameData[item + " stock"] > 0:
+
+            print("OLDSTOCK", gameData[item + " stock"])
+            # Increase income, subtract items sold from demand and stock
+            demand = gameData[item + ' demand'] 
+            stock = gameData[item + ' stock']
+            quantitySold = 0
+
+            if demand >= stock:
+                quantitySold = stock
+            elif demand < stock:
+                quantitySold = demand
+
+            gameData['cash'] += (quantitySold * gameData[item + " price"])
+            gameData[item + ' demand'] -= quantitySold
+            gameData[item + " stock"] -= quantitySold
+            print("NEWSTOCK", gameData[item + " stock"])
 
 
 

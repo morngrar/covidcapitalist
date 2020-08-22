@@ -6,6 +6,12 @@ from eventsystem import EventStream
 from productionsystem import add_factory, produce
 import eventsystem
 
+import time
+
+deltatime = 0
+last_time = 0
+
+
 # global variables
 market_events = eventsystem.EventStream()
 game_data = {
@@ -71,10 +77,21 @@ def main():
     pygame.display.set_caption("COVID Capitalist")
     pygame.display.update()
 
-    increaseDemand(game_data)
-
     running = True
     while running:
+        global deltatime
+        global last_time
+        now = time.time()
+        deltatime += now - last_time
+        last_time = now
+
+        # Increase demand and sell stock in intervals
+        if deltatime >= 1:
+            checkWarehouse(game_data)
+        if deltatime >= 3:
+            deltatime = 0
+            increaseDemand(game_data)               
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
