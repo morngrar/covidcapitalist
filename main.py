@@ -1,6 +1,6 @@
 import pygame
 
-from covidcapitalist import hello
+from hello import hello
 
 
 def main():
@@ -32,5 +32,5 @@ def main():
 
 
 if __name__=="__main__":
-    hello.hello()
+    hello()
     main()
