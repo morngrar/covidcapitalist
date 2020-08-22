@@ -68,4 +68,8 @@ def update_game_data(event, game_data):
     Updates game state additively according to event
     """
     for k, v in event.data.items():
-        game_data[k] += v
+        if game_data[k] > 0:    # Prevent negative number of factories
+            game_data[k] += v
+            return True
+        else:
+            return False
