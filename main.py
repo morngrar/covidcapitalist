@@ -1,6 +1,5 @@
 import pygame
 
-from hello import hello, event_glob_test
 from eventsystem import EventStream
 
 # global variables
@@ -10,12 +9,12 @@ game_data = {
     "cash" : 1000,
 
     #stock
-    "masks" : 0,
-    "gloves" : 0,
-    "antibac" : 0,
-    "visirs" : 0,
-    "ventilators" : 0,
-    "toilet paper" : 0,
+    "masks stock" : 0,
+    "gloves stock" : 0,
+    "antibac stock" : 0,
+    "visirs stock" : 0,
+    "ventilators stock" : 0,
+    "toilet-paper stock" : 0,
 
     # factories
     "mask factories" : 0,
@@ -31,9 +30,7 @@ game_data = {
 }
 
 def main():
-    """The games main loop
-
-    """
+    """The games main loop"""
 
     HIDPI = True
     SCREEN_WIDTH = 800
@@ -59,9 +56,4 @@ def main():
 
 
 if __name__=="__main__":
-    hello()
-    print(market_events.events)
-    event_glob_test(market_events)  # changes global, since python passes by ref
-    print(market_events.events)
-
     main()
