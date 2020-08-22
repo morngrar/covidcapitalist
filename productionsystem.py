@@ -5,6 +5,7 @@ import time
 deltatime = 0
 last_time = 0
 
+
 # How much each factory costs to build
 factory_cost = {
     "mask factories": 100,
@@ -12,7 +13,7 @@ factory_cost = {
     "antibac factories": 2000,
     "visir factories": 5000,
     "ventilator factories": 10000,
-    "tp factories": 3500,
+    "toilet-paper factories": 3500,
 }
 
 # Mow much each factory will add to production
@@ -22,7 +23,7 @@ factory_production_rate = {
     "antibac factories": 10,
     "visir factories": 7,
     "ventilator factories": 5,
-    "tp factories": 15,
+    "toilet-paper factories": 15,
 }
 
 
@@ -41,9 +42,18 @@ def produce(game_data):
     now = time.time()
     deltatime += now - last_time
     last_time = now
-    print("DELTA: ", deltatime)
-    print("NOW: ", now)
+    factory_keys = [key for key in game_data.keys() if 'factories' in key]
+    stock_keys = [key for key in game_data.keys() if 'stock' in key]
 
     if deltatime >= 1:
-        print(deltatime)
         deltatime = 0
+
+        for factory in factory_keys:
+            print(factory, game_data[factory])
+            item = factory.split()[0] + " stock"
+            game_data[item] += factory_production_rate[factory] * game_data[factory] # Add to stock
+
+        print("-----")
+        for stock in stock_keys:
+            print(stock, game_data[stock])
+        print("\n")

@@ -11,11 +11,11 @@ game_data = {
     "cash" : 1000,
 
     #stock
-    "masks stock" : 0,
-    "gloves stock" : 0,
+    "mask stock" : 0,
+    "glove stock" : 0,
     "antibac stock" : 0,
-    "visirs stock" : 0,
-    "ventilators stock" : 0,
+    "visir stock" : 0,
+    "ventilator stock" : 0,
     "toilet-paper stock" : 0,
 
     # factories
@@ -24,7 +24,7 @@ game_data = {
     "antibac factories" : 0,
     "visir factories" : 0,
     "ventilator factories" : 0,
-    "tp factories" : 0,
+    "toilet-paper factories" : 0,
 
 
     # off the books production
@@ -58,14 +58,14 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
         produce(game_data)
-        print(game_data)
+        # print(game_data)
 
 if __name__=="__main__":
     hello()
     print(market_events.events)
     event_glob_test(market_events)  # changes global, since python passes by ref
     print(market_events.events)
-    add_factory(game_data, "visir factories")
+    add_factory(game_data, "mask factories")
 
 
     main()
