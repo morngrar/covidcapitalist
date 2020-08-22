@@ -1,5 +1,6 @@
 import pygame
 
+from productionsystem import add_factory, produce
 import eventsystem
 
 # global variables
@@ -9,19 +10,19 @@ game_data = {
     "cash" : 1000,
 
     #stock
-    "masks stock" : 0,
-    "gloves stock" : 0,
+    "mask stock" : 0,
+    "glove stock" : 0,
     "antibac stock" : 0,
-    "visirs stock" : 0,
-    "ventilators stock" : 0,
+    "visir stock" : 0,
+    "ventilator stock" : 0,
     "toilet-paper stock" : 0,
 
     # demand
-    "masks demand" : 0,
-    "gloves demand" : 0,
+    "mask demand" : 0,
+    "glove demand" : 0,
     "antibac demand" : 0,
-    "visirs demand" : 0,
-    "ventilators demand" : 0,
+    "visir demand" : 0,
+    "ventilator demand" : 0,
     "toilet-paper demand" : 0,
 
     # factories
@@ -30,7 +31,7 @@ game_data = {
     "antibac factories" : 0,
     "visir factories" : 0,
     "ventilator factories" : 0,
-    "tp factories" : 0,
+    "toilet-paper factories" : 0,
 
 
     # off the books production
@@ -57,12 +58,6 @@ def main():
     )
 
     pygame.display.set_caption("COVID Capitalist")
-
-    from textwraptest import drawText
-    font = pygame.font.Font('freesansbold.ttf', EVENT_FONT_SIZE)
-    text_box = (50, 100, 200, 500)
-    pygame.draw.rect(screen, (50, 50, 50), pygame.Rect(text_box))
-    drawText(screen, "Testing drawing some text", (255,255,255), text_box, font)
     pygame.display.update()
 
     running = True
@@ -70,6 +65,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     print(game_data)
@@ -85,6 +81,8 @@ def main():
                 print(event.text)
                 eventsystem.update_game_data(event, game_data)
 
+        produce(game_data)
 
 if __name__=="__main__":
+    add_factory(game_data, "mask factories")
     main()
