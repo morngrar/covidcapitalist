@@ -1,13 +1,9 @@
-import pygame
-
-from hello import hello, event_glob_test
-from warehouse import checkWarehouse, increaseDemand
-from eventsystem import EventStream
-from productionsystem import add_factory, produce
-import eventsystem
-from ui.factory import FactoryBox
-
 import time
+import pygame
+from warehouse import checkWarehouse, increaseDemand
+import productionsystem
+import eventsystem
+
 
 deltatime = 0
 last_time = 0
@@ -87,9 +83,11 @@ def main():
         # font sizes
         {
             "events":EVENT_FONT_SIZE,
+            "info": int(EVENT_FONT_SIZE * 1.8),
         }
     )
 
+    window.update_production_data(productionsystem.factory_cost, productionsystem.factory_production_rate)
 
     running = True
     while running:
@@ -118,19 +116,24 @@ def main():
                     factories = [key for key in game_data.keys() if "factories" in key]
                     for k in factories:
                         game_data[k] += 1
-        
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                print("mouse button clicked!")
+                rect = window.mask_factory.get_rect()
+                rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    productionsystem.add_factory(game_data, "mask factories")
+                    print(pygame.mouse.get_pos())
+
         if market_events.time_for_event():
             event = market_events.pick_event()
             if event:
                 if eventsystem.update_game_data(event, game_data):
                     window.add_event(event)
 
-        produce(game_data)
-        
-        factory1 = FactoryBox((1, 1, (50, 50)))
-        factory1.draw(screen, (50, 50))
+        productionsystem.produce(game_data)
 
 
+        window.update_gamedata(game_data)
         window.draw()
         pygame.display.update()
 

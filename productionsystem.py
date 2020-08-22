@@ -49,11 +49,6 @@ def produce(game_data):
         deltatime = 0
 
         for factory in factory_keys:
-            print(factory, game_data[factory])
+        
             item = factory.split()[0] + " stock"
             game_data[item] += factory_production_rate[factory] * game_data[factory] # Add to stock
-
-        print("-----")
-        for stock in stock_keys:
-            print(stock, game_data[stock])
-        print("\n")
