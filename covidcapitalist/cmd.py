@@ -1,5 +1,7 @@
 import pygame
 
+from covidcapitalist import hello
+
 
 def main():
     """The games main loop
@@ -30,4 +32,5 @@ def main():
 
 
 if __name__=="__main__":
+    hello.hello()
     main()
