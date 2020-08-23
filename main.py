@@ -89,6 +89,14 @@ def main():
 
     window.update_production_data(productionsystem.factory_cost, productionsystem.factory_production_rate)
 
+    # music
+    pygame.mixer.init()
+    pygame.mixer.music.load("audio\\covid capitalist.ogg")
+    pygame.mixer.music.play(-1, 0.0)
+
+
+
+
     running = True
     while running:
         global deltatime
