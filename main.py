@@ -111,7 +111,6 @@ def main():
             checkWarehouse(game_data)
         if deltatime >= 4:
             deltatime = 0
-            print("called")
             increaseDemand(game_data)               
         
         for event in pygame.event.get():
@@ -121,11 +120,11 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     print(game_data)
-                elif event.key == pygame.K_f:
-                    # increment all factories by one on f-keypress
-                    factories = [key for key in game_data.keys() if "factories" in key]
-                    for k in factories:
-                        game_data[k] += 1
+                # elif event.key == pygame.K_f:
+                #     # increment all factories by one on f-keypress
+                #     factories = [key for key in game_data.keys() if "factories" in key]
+                #     for k in factories:
+                #         game_data[k] += 1
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 
                 # mask factory

@@ -46,6 +46,7 @@ def checkWarehouse(gameData):
             # Increase income, subtract items sold from demand and stock
             demand = gameData[item + ' demand'] 
             stock = gameData[item + ' stock']
+            stock = int(stock * (gameData["renown"] / 100))
             quantitySold = 0
 
             if demand >= stock:
@@ -53,7 +54,9 @@ def checkWarehouse(gameData):
             elif demand < stock:
                 quantitySold = demand
 
-            gameData['cash'] += (quantitySold * gameData[item + " price"])
+            quantitySold = int(quantitySold * (gameData["renown"] / 200))
+
+            gameData['cash'] += quantitySold * gameData[item + " price"]
             gameData[item + ' demand'] -= quantitySold
             gameData[item + " stock"] -= quantitySold
 
