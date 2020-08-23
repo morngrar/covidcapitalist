@@ -90,8 +90,10 @@ def main():
     window.update_production_data(productionsystem.factory_cost, productionsystem.factory_production_rate)
 
     # music
+    import os
+    audiopath = os.path.join("audio", "covid capitalist.ogg")
     pygame.mixer.init()
-    pygame.mixer.music.load("audio\\covid capitalist.ogg")
+    pygame.mixer.music.load(audiopath)
     pygame.mixer.music.play(-1, 0.0)
 
 
