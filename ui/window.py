@@ -112,6 +112,12 @@ class Window:
             self.info_font,
             pos=(0,self.offbooks_title_height)
         )
+        self.offbooks_child_labor = OffBooksProducerBox(
+            self.offbooks_surface, self.offbooks_box_dimensions,
+            "Child labor mask production",
+            self.info_font,
+            pos=(0,self.offbooks_title_height+self.offbooks_box_dimensions[1])
+        )
 
     def add_event(self, event):
         self.event_list.append(
@@ -228,7 +234,14 @@ class Window:
             self.offbooks_title_rect,
             self.info_font,
         )
+        self.offbooks_moonshiners.production = self.game_data["moonshiner factories"] * self.production_rate["moonshiner factories"]
+        self.offbooks_moonshiners.cost = self.production_cost["moonshiner factories"]
         self.offbooks_moonshiners.draw()
+
+        self.offbooks_child_labor.production = self.game_data["childlabor factories"] * self.production_rate["childlabor factories"]
+        self.offbooks_child_labor.cost = self.production_cost["childlabor factories"]
+        self.offbooks_child_labor.draw()
+
         self.screen.blit(self.offbooks_surface, (self.offbooks_xpos, self.offbooks_ypos))
 
     def update_production_data(self, cost, rate):
