@@ -5,6 +5,7 @@ import time
 from ui.event import EventBox
 from ui import colors
 from ui import textwrap
+from ui.factory import FactoryBox
 
 class Window:
     def __init__(self, screen, width, height, fontsizes):
@@ -13,7 +14,6 @@ class Window:
         self.height = height
 
         self.game_data = None
-
 
         self.event_list = []
         self.event_height = height // 11
@@ -50,6 +50,26 @@ class Window:
         )
 
         # stock area
+        
+
+        # production area
+        self.production_height = (height - self.infobar_height) // 2
+        self.production_ypos = self.production_height
+        self.production_surface = pygame.Surface((self.left_width, self.production_height))
+        
+        self.mask_factory = FactoryBox(
+            self.production_surface, 
+            (self.left_width // 3, self.production_height // 3), 
+            "Mask Factories", 
+            self.info_font, 
+            pos=(0, 0)
+            )
+        
+        self.glove_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Glove Factories", self.info_font, pos=(0, self.production_height // 3))
+        self.antibac_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Antibac Factories", self.info_font, pos=(0, (self.production_height // 3) * 2 ))
+        self.visir_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Visir Factories", self.info_font, pos=(self.left_width // 3, 0))
+        self.ventilator_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Ventilator Factories", self.info_font, pos=(self.left_width // 3, self.production_height // 3))
+        self.toilet_paper_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Toilet paper Factories", self.info_font, pos=(self.left_width // 3, (self.production_height // 3) * 2 ))
 
     def add_event(self, event):
         self.event_list.append(
@@ -112,3 +132,40 @@ class Window:
         )
         self.screen.blit(self.infobar_surface, (0, 0))
 
+        # Production Area
+        # Mask
+        self.mask_factory.production = self.game_data["mask factories"] * self.production_rate["mask factories"]
+        self.mask_factory.cost = self.production_cost["mask factories"]
+        self.mask_factory.draw()
+        
+        # Glove
+        self.glove_factory.production = self.game_data["glove factories"] * self.production_rate["glove factories"]
+        self.glove_factory.cost = self.production_cost["glove factories"]
+        self.glove_factory.draw()
+        
+        # Antibac
+        self.antibac_factory.production = self.game_data["antibac factories"] * self.production_rate["antibac factories"]
+        self.antibac_factory.cost = self.production_cost["antibac factories"]
+        self.antibac_factory.draw()
+
+        # Visir
+        self.visir_factory.production = self.game_data["visir factories"] * self.production_rate["visir factories"]
+        self.visir_factory.cost = self.production_cost["visir factories"]
+        self.visir_factory.draw()
+
+        # Ventilator
+        self.ventilator_factory.production = self.game_data["ventilator factories"] * self.production_rate["ventilator factories"]
+        self.ventilator_factory.cost = self.production_cost["ventilator factories"]
+        self.ventilator_factory.draw()
+
+        # Toilet paper
+        self.toilet_paper_factory.production = self.game_data["toilet-paper factories"] * self.production_rate["toilet-paper factories"]
+        self.toilet_paper_factory.cost = self.production_cost["toilet-paper factories"]
+        self.toilet_paper_factory.draw()
+
+        # Blit
+        self.screen.blit(self.production_surface, (0, self.production_ypos))
+
+    def update_production_data(self, cost, rate):
+        self.production_cost = cost
+        self.production_rate = rate
