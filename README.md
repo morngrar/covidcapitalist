@@ -1,5 +1,5 @@
 # COVID Capitalist
-48h jam based on Weekly Game Jam week 163, from a team of three.
+48h jam based on Weekly Game Jam week 163, from a team of three. The theme: **Tycoon**
 
 ## Installing
 The game has two dependencies. Python 3 and the module `pygame`.
