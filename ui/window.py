@@ -54,7 +54,7 @@ class Window:
 
         # production area
         self.production_height = (height - self.infobar_height) // 2
-        self.production_ypos = self.production_height
+        self.production_ypos = self.production_height + self.infobar_height
         self.production_width = self.left_width //3 * 2
         self.production_surface = pygame.Surface((self.production_width, self.production_height))
         
