@@ -125,6 +125,36 @@ class Window:
         self.demand_ventilator_rect = pygame.Rect(
             self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
         )
+
+        # glove stock
+        self.stock_glove_height = (self.height - self.stock_height) // 6
+        self.stock_glove_width = self.left_width // 4
+        self.stock_glove_surface = pygame.Surface((self.stock_glove_width, self.stock_glove_height))
+        self.stock_glove_rect = pygame.Rect(
+            self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
+        )
+        # glove demand
+        self.demand_glove_height = (self.height - self.stock_height) // 6
+        self.demand_glove_width = self.left_width // 4
+        self.demand_glove_surface = pygame.Surface((self.stock_glove_width, self.stock_glove_height))
+        self.demand_glove_rect = pygame.Rect(
+            self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
+        )
+        
+        # toiler-paper stock
+        self.stock_toilet_paper_height = (self.height - self.stock_height) // 6
+        self.stock_toilet_paper_width = self.left_width // 4
+        self.stock_toilet_paper_surface = pygame.Surface((self.stock_toilet_paper_width, self.stock_toilet_paper_height))
+        self.stock_toilet_paper_rect = pygame.Rect(
+            self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
+        )
+        # toiler-paper demand
+        self.demand_toilet_paper_height = (self.height - self.stock_height) // 6
+        self.demand_toilet_paper_width = self.left_width // 4
+        self.demand_toilet_paper_surface = pygame.Surface((self.stock_toilet_paper_width, self.stock_toilet_paper_height))
+        self.demand_toilet_paper_rect = pygame.Rect(
+            self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
+        )
         
 
     def add_event(self, event):
@@ -311,32 +341,59 @@ class Window:
             self.stock_font
         )
 
-        # # glove stock
-        # self.stock_glove_surface.fill(colors.DARK_GRAY)
-        # stockGlove = f"Gloves: {self.game_data['glove stock']}"
-        # textwrap.draw_text(
-        #     self.stock_glove_surface,
-        #     stockGlove,
-        #     colors.WHITE,   
-        #     self.stock_glove_rect,
-        #     self.stock_font
-        # )
+        # glove stock
+        self.stock_glove_surface.fill(colors.DARK_GRAY)
+        stockGlove = f"Gloves: {self.game_data['glove stock']}"
+        textwrap.draw_text(
+            self.stock_glove_surface,
+            stockGlove,
+            colors.WHITE,   
+            self.stock_glove_rect,
+            self.stock_font
+        )
 
-        # # glove demand
-        # self.demand_glove_surface.fill(colors.DARK_GRAY)
-        # demandGlove = f"Demand: {self.game_data['glove demand']}"    # Number of demand for
-        # if self.game_data['glove stock'] < self.game_data['glove demand']: # Check if stock is lower than demand
-        #     demandColor = colors.DARK_RED
-        # else:
-        #     demandColor = colors.MONEY_GREEN
+        # glove demand
+        self.demand_glove_surface.fill(colors.DARK_GRAY)
+        demandGlove = f"Demand: {self.game_data['glove demand']}"    # Number of demand for
+        if self.game_data['glove stock'] < self.game_data['glove demand']: # Check if stock is lower than demand
+            demandColor = colors.DARK_RED
+        else:
+            demandColor = colors.MONEY_GREEN
         
-        # textwrap.draw_text(
-        #     self.demand_glove_surface,
-        #     demandGlove,
-        #     demandColor,
-        #     self.demand_glove_rect,
-        #     self.stock_font
-        # )
+        textwrap.draw_text(
+            self.demand_glove_surface,
+            demandGlove,
+            demandColor,
+            self.demand_glove_rect,
+            self.stock_font
+        )
+
+        # toilet-paper stock
+        self.stock_toilet_paper_surface.fill(colors.DARK_GRAY)
+        stockTP = f"Toilet-paper: {self.game_data['toilet-paper stock']}"
+        textwrap.draw_text(
+            self.stock_toilet_paper_surface,
+            stockGlove,
+            colors.WHITE,   
+            self.stock_toilet_paper_rect,
+            self.stock_font
+        )
+
+        # toilet-paper demand
+        self.demand_toilet_paper_surface.fill(colors.DARK_GRAY)
+        demandTP = f"Demand: {self.game_data['toilet-paper demand']}"    # Number of demand for
+        if self.game_data['toilet-paper stock'] < self.game_data['toilet-paper demand']: # Check if stock is lower than demand
+            demandColor = colors.DARK_RED
+        else:
+            demandColor = colors.MONEY_GREEN
+        
+        textwrap.draw_text(
+            self.demand_toilet_paper_surface,
+            demandTP,
+            demandColor,
+            self.demand_toilet_paper_rect,
+            self.stock_font
+        )
 
         self.screen.blit(self.stock_surface, (0, self.infobar_height)) # Warehouse
         # Left side, first column, row 1-3
@@ -349,8 +406,10 @@ class Window:
         # Right side, second column, row 1-3
         self.screen.blit(self.stock_ventilator_surface, (self.left_width//2, self.infobar_height * 2))   # ventilator stock
         self.screen.blit(self.demand_ventilator_surface, (self.left_width//2, self.infobar_height * 4))  # ventilator demand
-        # self.screen.blit(self.stock_glove_surface, (self.left_width//2, self.infobar_height * 6))   # glove stock
-        # self.screen.blit(self.demand_glove_surface, (self.left_width//2, self.infobar_height * 8))  # glove demand
+        self.screen.blit(self.stock_glove_surface, (self.left_width//2, self.infobar_height * 6))   # glove stock
+        self.screen.blit(self.demand_glove_surface, (self.left_width//2, self.infobar_height * 8))  # glove demand
+        self.screen.blit(self.stock_toilet_paper_surface, (self.left_width//2, self.infobar_height * 10))   # toilet-paper stock
+        self.screen.blit(self.demand_toilet_paper_surface, (self.left_width//2, self.infobar_height * 12))  # toilet-paper demand
 
         
         
