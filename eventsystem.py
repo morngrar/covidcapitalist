@@ -3,7 +3,7 @@
 import random
 import time
 
-NOTHING_CHANCE = 10
+NOTHING_CHANCE = 20
 EVENT_INTERVAL = 1   # value in seconds
 
 class Event:
@@ -24,7 +24,7 @@ class EventStream:
             Event(
                 "A toilet-paper warehouse in Tulpa burned down!",
                 {
-                    "toilet-paper demand" : 2000,
+                    "toilet-paper demand" : 200,
                 }
             ),
             Event(

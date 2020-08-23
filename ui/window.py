@@ -439,7 +439,7 @@ class Window:
         stockTP = f"Toilet-paper: {self.game_data['toilet-paper stock']}"
         textwrap.draw_text(
             self.stock_toilet_paper_surface,
-            stockGlove,
+            stockTP,
             colors.WHITE,   
             self.stock_toilet_paper_rect,
             self.stock_font

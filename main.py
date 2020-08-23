@@ -109,8 +109,9 @@ def main():
         # Increase demand and sell stock in intervals
         if deltatime >= 1:
             checkWarehouse(game_data)
-        if deltatime >= 2:
+        if deltatime >= 4:
             deltatime = 0
+            print("called")
             increaseDemand(game_data)               
         
         for event in pygame.event.get():
@@ -133,7 +134,6 @@ def main():
                 if rect.collidepoint(pygame.mouse.get_pos()):
                     if productionsystem.add_factory(game_data, "mask factories"):
                         pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
-                    print(pygame.mouse.get_pos())
                 
                 # glove factory
                 rect = window.glove_factory.get_rect()
@@ -141,7 +141,6 @@ def main():
                 if rect.collidepoint(pygame.mouse.get_pos()):
                     if productionsystem.add_factory(game_data, "glove factories"):
                         pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
-                    print(pygame.mouse.get_pos())
 
                 # antibac factory
                 rect = window.antibac_factory.get_rect()
@@ -149,7 +148,6 @@ def main():
                 if rect.collidepoint(pygame.mouse.get_pos()):
                     if productionsystem.add_factory(game_data, "antibac factories"):
                         pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
-                    print(pygame.mouse.get_pos())
 
                 # visir factory
                 rect = window.visir_factory.get_rect()
@@ -157,7 +155,6 @@ def main():
                 if rect.collidepoint(pygame.mouse.get_pos()):
                     if productionsystem.add_factory(game_data, "visir factories"):
                         pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
-                    print(pygame.mouse.get_pos())
 
                 # ventilator factory
                 rect = window.ventilator_factory.get_rect()
@@ -165,7 +162,6 @@ def main():
                 if rect.collidepoint(pygame.mouse.get_pos()):
                     if productionsystem.add_factory(game_data, "ventilator factories"):
                         pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
-                    print(pygame.mouse.get_pos())
 
                 # toilet-paper factory
                 rect = window.toilet_paper_factory.get_rect()
@@ -173,7 +169,6 @@ def main():
                 if rect.collidepoint(pygame.mouse.get_pos()):
                     if productionsystem.add_factory(game_data, "toilet-paper factories"):
                         pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
-                    print(pygame.mouse.get_pos())
 
                 # moonshiners
                 rect = window.offbooks_moonshiners.get_rect()
