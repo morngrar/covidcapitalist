@@ -55,7 +55,8 @@ class Window:
         # production area
         self.production_height = (height - self.infobar_height) // 2
         self.production_ypos = self.production_height
-        self.production_surface = pygame.Surface((self.left_width, self.production_height))
+        self.production_width = self.left_width //3 * 2
+        self.production_surface = pygame.Surface((self.production_width, self.production_height))
         
         self.mask_factory = FactoryBox(
             self.production_surface, 
@@ -70,6 +71,14 @@ class Window:
         self.visir_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Visir Factories", self.info_font, pos=(self.left_width // 3, 0))
         self.ventilator_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Ventilator Factories", self.info_font, pos=(self.left_width // 3, self.production_height // 3))
         self.toilet_paper_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Toilet paper Factories", self.info_font, pos=(self.left_width // 3, (self.production_height // 3) * 2 ))
+
+
+        # Off-the-books area
+        self.offbooks_height = self.production_height
+        self.offbooks_width = self.left_width-self.production_width
+        self.offbooks_ypos = self.production_ypos
+        self.offbooks_xpos = self.production_width
+        self.offbooks_surface = pygame.Surface((self.offbooks_width, self.offbooks_height))
 
     def add_event(self, event):
         self.event_list.append(
@@ -165,6 +174,11 @@ class Window:
 
         # Blit
         self.screen.blit(self.production_surface, (0, self.production_ypos))
+
+
+        # offbooks drawing
+        self.offbooks_surface.fill((50, 20, 20))
+        self.screen.blit(self.offbooks_surface, (self.offbooks_xpos, self.offbooks_ypos))
 
     def update_production_data(self, cost, rate):
         self.production_cost = cost
