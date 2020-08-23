@@ -53,7 +53,7 @@ game_data = {
 def main():
     """The games main loop"""
 
-    HIDPI = False
+    HIDPI = True
     SCREEN_WIDTH = 1920
     SCREEN_HEIGHT = 1280
     EVENT_FONT_SIZE = 16
@@ -61,9 +61,9 @@ def main():
     pygame.init()
 
     if HIDPI:
-        SCREEN_HEIGHT *= 2
-        SCREEN_WIDTH *= 2
-        EVENT_FONT_SIZE *= 2
+        SCREEN_HEIGHT = int(SCREEN_HEIGHT * 1.5)
+        SCREEN_WIDTH = int(SCREEN_WIDTH * 1.5)
+        EVENT_FONT_SIZE = int(EVENT_FONT_SIZE * 1.5)
 
     screen = pygame.display.set_mode(
         (SCREEN_WIDTH, SCREEN_HEIGHT)
