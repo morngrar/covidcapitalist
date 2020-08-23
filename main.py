@@ -46,10 +46,8 @@ game_data = {
     "visir factories" : 0,
     "ventilator factories" : 0,
     "toilet-paper factories" : 0,
-
-
-    # off the books production
-    "moonshine producers" : 0,
+    "moonshiner factories": 0,
+    "childlabor factories": 0,
 }
 
 def main():
@@ -97,9 +95,6 @@ def main():
     pygame.mixer.init()
     pygame.mixer.music.load(bgmusic)
     pygame.mixer.music.play(-1, 0.0)
-
-
-
 
     running = True
     while running:
@@ -177,6 +172,39 @@ def main():
                     if productionsystem.add_factory(game_data, "toilet-paper factories"):
                         pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
                     print(pygame.mouse.get_pos())
+
+                # moonshiners
+                rect = window.offbooks_moonshiners.get_rect()
+                rect = pygame.Rect(window.offbooks_xpos + rect.x, window.offbooks_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    productionsystem.add_factory(game_data, "moonshiner factories")
+                    market_events.add(
+                        eventsystem.Event(
+                            "A documentary revealed one of your moonshiner connections! They had to shut down!",
+                            {
+                                "renown": -5,
+                                "moonshiner factories": -1
+                            },
+                            oneoff=True
+                        )
+                    )
+
+
+                #child labor
+                rect = window.offbooks_child_labor.get_rect()
+                rect = pygame.Rect(window.offbooks_xpos + rect.x, window.offbooks_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    productionsystem.add_factory(game_data, "childlabor factories")
+                    market_events.add(
+                        eventsystem.Event(
+                            "A documentary revealed one of your child labor facilities! It had to be shut down!",
+                            {
+                                "renown": -10,
+                                "childlabor factories": -1
+                            },
+                            oneoff=True
+                        )
+                    )
 
         if market_events.time_for_event():
             event = market_events.pick_event()

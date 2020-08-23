@@ -4,13 +4,14 @@ import random
 import time
 
 NOTHING_CHANCE = 10
-EVENT_INTERVAL = 0.5   # value in seconds
+EVENT_INTERVAL = 1   # value in seconds
 
 class Event:
-    def __init__(self, text, data):
+    def __init__(self, text, data, oneoff=False):
         """data is a dict of game values that will be added to current game data"""
         self.text = text
         self.data = data
+        self.oneoff = oneoff
 
 
 class EventStream:
@@ -91,7 +92,11 @@ class EventStream:
         
     def pick_event(self):
         """Picks a random event and returns it"""
-        return self.events[random.randrange(len(self.events))]
+        index = random.randrange(len(self.events))
+        event = self.events[index]
+        if event and event.oneoff:
+            del self.events[index]
+        return event
 
     def add(self, event):
         self.events.append(event)
@@ -103,10 +108,10 @@ def update_game_data(event, game_data):
     Updates game state additively according to event
     """
     for k, v in event.data.items():
-        print("K", k)
-        print("V", v)
-        if game_data[k] + v > -1:    # Prevent negative numbers of factories, stock or demand
-            game_data[k] += v
-            return True
-        else:
+        if game_data[k] + v < 0:    # Prevent negative numbers of factories, stock or demand
             return False
+            
+    for k, v in event.data.items():
+        game_data[k] += v
+
+    return True
