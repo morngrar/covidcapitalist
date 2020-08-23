@@ -10,10 +10,10 @@ last_time = 0
 factory_cost = {
     "mask factories": 100,
     "glove factories": 500,
-    "antibac factories": 2000,
-    "visir factories": 5000,
-    "ventilator factories": 10000,
-    "toilet-paper factories": 3500,
+    "antibac factories": 100,
+    "visir factories": 550,
+    "ventilator factories": 1000,
+    "toilet-paper factories": 350,
 }
 
 # Mow much each factory will add to production

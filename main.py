@@ -117,11 +117,47 @@ def main():
                     for k in factories:
                         game_data[k] += 1
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                print("mouse button clicked!")
+                
+                # mask factory
                 rect = window.mask_factory.get_rect()
                 rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
                 if rect.collidepoint(pygame.mouse.get_pos()):
                     productionsystem.add_factory(game_data, "mask factories")
+                    print(pygame.mouse.get_pos())
+                
+                # glove factory
+                rect = window.glove_factory.get_rect()
+                rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    productionsystem.add_factory(game_data, "glove factories")
+                    print(pygame.mouse.get_pos())
+
+                # antibac factory
+                rect = window.antibac_factory.get_rect()
+                rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    productionsystem.add_factory(game_data, "antibac factories")
+                    print(pygame.mouse.get_pos())
+
+                # visir factory
+                rect = window.visir_factory.get_rect()
+                rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    productionsystem.add_factory(game_data, "visir factories")
+                    print(pygame.mouse.get_pos())
+
+                # ventilator factory
+                rect = window.ventilator_factory.get_rect()
+                rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    productionsystem.add_factory(game_data, "ventilator factories")
+                    print(pygame.mouse.get_pos())
+
+                # toilet-paper factory
+                rect = window.toilet_paper_factory.get_rect()
+                rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    productionsystem.add_factory(game_data, "toilet-paper factories")
                     print(pygame.mouse.get_pos())
 
         if market_events.time_for_event():
