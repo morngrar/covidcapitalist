@@ -62,7 +62,7 @@ class Window:
             fontsizes['title']
         )
         
-        self.stock_surface = pygame.Surface((self.stock_width,self.stock_height))
+        self.stock_surface = pygame.Surface((self.stock_width, self.stock_height))
         self.stock_title_rect = pygame.Rect(
             self.info_pad, self.info_pad, self.left_width, self.infobar_height * 2
         )
@@ -113,8 +113,6 @@ class Window:
             renown = f"Renown: {self.game_data['renown']}%"
             cash = f"Cash: ${self.game_data['cash']}"
 
-        # Stock box
-        self.stock_surface.fill(colors.DARKER_GRAY)
         
         textwrap.draw_text(
             self.infobar_surface, 
@@ -132,6 +130,11 @@ class Window:
             self.info_font,
         )
 
+        self.screen.blit(self.infobar_surface, (0, 0))
+
+
+        # Stock box
+        self.stock_surface.fill(colors.DARKER_GRAY)
         stockTitle = "WAREHOUSE STOCK"
         textwrap.draw_text(
             self.stock_surface,
@@ -141,5 +144,4 @@ class Window:
             self.stock_title_font,
         )
         
-        self.screen.blit(self.infobar_surface, (0, 0))
-        self.screen.blit(self.stock_surface, (0,self.infobar_height))
+        self.screen.blit(self.stock_surface, (0, self.infobar_height))

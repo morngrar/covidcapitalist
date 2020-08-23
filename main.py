@@ -85,7 +85,7 @@ def main():
             "events":EVENT_FONT_SIZE,
             "info": int(EVENT_FONT_SIZE * 1.8),
             "stock":int(EVENT_FONT_SIZE * 2.0),
-            "title":int(EVENT_FONT_SIZE * 10),
+            "title":int(EVENT_FONT_SIZE * 2),
         }
     )
 
