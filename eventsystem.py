@@ -57,6 +57,12 @@ class EventStream:
                 }
             ),
             Event(
+                "Your office got water damage!",
+                {
+                    "cash" : -300,
+                }
+            ),
+            Event(
                 "Some visirs got lost in transport!",
                 {
                     "visir stock" : -30,
