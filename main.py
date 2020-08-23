@@ -32,12 +32,12 @@ game_data = {
     "toilet-paper demand" : 0,
 
     #price
-    "mask price" : 5,
-    "glove price" : 7,
-    "antibac price" : 20,
+    "mask price" : 3,
+    "glove price" : 5,
+    "antibac price" : 7,
     "visir price" : 10,
-    "ventilator price" : 300,
-    "toilet-paper price" : 10,
+    "ventilator price" : 50,
+    "toilet-paper price" : 2,
 
     # factories
     "mask factories" : 0,
@@ -53,7 +53,7 @@ game_data = {
 def main():
     """The games main loop"""
 
-    HIDPI = False
+    HIDPI = True
     SCREEN_WIDTH = 1920
     SCREEN_HEIGHT = 1280
     EVENT_FONT_SIZE = 16
@@ -61,9 +61,9 @@ def main():
     pygame.init()
 
     if HIDPI:
-        SCREEN_HEIGHT *= 2
-        SCREEN_WIDTH *= 2
-        EVENT_FONT_SIZE *= 2
+        SCREEN_HEIGHT = int(SCREEN_HEIGHT * 1.5)
+        SCREEN_WIDTH = int(SCREEN_WIDTH * 1.5)
+        EVENT_FONT_SIZE = int(EVENT_FONT_SIZE * 1.5)
 
     screen = pygame.display.set_mode(
         (SCREEN_WIDTH, SCREEN_HEIGHT)
@@ -134,7 +134,6 @@ def main():
                 if rect.collidepoint(pygame.mouse.get_pos()):
                     if productionsystem.add_factory(game_data, "mask factories"):
                         pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
-                
                 # glove factory
                 rect = window.glove_factory.get_rect()
                 rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
