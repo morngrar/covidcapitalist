@@ -6,6 +6,7 @@ from ui.event import EventBox
 from ui import colors
 from ui import textwrap
 from ui.factory import FactoryBox
+from ui.offbooks import OffBooksProducerBox
 
 class Window:
     def __init__(self, screen, width, height, fontsizes):
@@ -53,6 +54,8 @@ class Window:
         
 
         # production area
+        self.production_cost = None
+        self.production_rate = None
         self.production_height = (height - self.infobar_height) // 2
         self.production_ypos = self.production_height + self.infobar_height
         self.production_width = self.left_width //3 * 2
@@ -79,6 +82,23 @@ class Window:
         self.offbooks_ypos = self.production_ypos
         self.offbooks_xpos = self.production_width
         self.offbooks_surface = pygame.Surface((self.offbooks_width, self.offbooks_height))
+
+        # Off-the-boox title
+        self.offbooks_title_height = self.infobar_height
+        self.offbooks_title_rect = pygame.Rect(
+           self.info_pad, self.info_pad, self.offbooks_width, self.offbooks_title_height
+        )
+        
+        # off-the-books boxes
+        self.offbooks_box_dimensions = (
+            self.offbooks_width, (self.offbooks_height-self.offbooks_title_height) // 2
+        )
+        self.offbooks_moonshiners = OffBooksProducerBox(
+            self.offbooks_surface, self.offbooks_box_dimensions,
+            "Moonshiners producing cheap Antibac",
+            self.info_font,
+            pos=(0,self.offbooks_title_height)
+        )
 
     def add_event(self, event):
         self.event_list.append(
@@ -177,7 +197,15 @@ class Window:
 
 
         # offbooks drawing
-        self.offbooks_surface.fill((50, 20, 20))
+        self.offbooks_surface.fill(colors.OFFBOOKS_BG)
+        textwrap.draw_text(
+            self.offbooks_surface,
+            "Off the books",
+            colors.OFFBOOKS_TITLE,
+            self.offbooks_title_rect,
+            self.info_font,
+        )
+        self.offbooks_moonshiners.draw()
         self.screen.blit(self.offbooks_surface, (self.offbooks_xpos, self.offbooks_ypos))
 
     def update_production_data(self, cost, rate):

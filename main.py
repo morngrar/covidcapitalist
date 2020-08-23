@@ -174,7 +174,7 @@ def main():
                     window.add_event(event)
 
         productionsystem.produce(game_data)
-
+    
 
         window.update_gamedata(game_data)
         window.draw()
