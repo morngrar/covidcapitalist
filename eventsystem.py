@@ -3,8 +3,8 @@
 import random
 import time
 
-NOTHING_CHANCE = 3
-EVENT_INTERVAL = 1   # value in seconds
+NOTHING_CHANCE = 10
+EVENT_INTERVAL = 0.5   # value in seconds
 
 class Event:
     def __init__(self, text, data):
@@ -61,7 +61,13 @@ class EventStream:
                 {
                     "ventilator stock" : -1,
                 }
-            )
+            ),
+            Event(
+                "A a recent ad-campaign of yours went viral!",
+                {
+                    "renown" : 3,
+                }
+            ),
         ]
 
         # actual initial events
