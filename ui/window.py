@@ -95,6 +95,36 @@ class Window:
         self.demand_antibac_rect = pygame.Rect(
             self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
         )
+
+        # visir stock
+        self.stock_visir_height = (self.height - self.stock_height) // 6
+        self.stock_visir_width = self.left_width // 4
+        self.stock_visir_surface = pygame.Surface((self.stock_visir_width, self.stock_visir_height))
+        self.stock_visir_rect = pygame.Rect(
+            self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
+        )
+        # visir demand
+        self.demand_visir_height = (self.height - self.stock_height) // 6
+        self.demand_visir_width = self.left_width // 4
+        self.demand_visir_surface = pygame.Surface((self.stock_visir_width, self.stock_visir_height))
+        self.demand_visir_rect = pygame.Rect(
+            self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
+        )
+
+        # ventilator stock
+        self.stock_ventilator_height = (self.height - self.stock_height) // 6
+        self.stock_ventilator_width = self.left_width // 4
+        self.stock_ventilator_surface = pygame.Surface((self.stock_ventilator_width, self.stock_ventilator_height))
+        self.stock_ventilator_rect = pygame.Rect(
+            self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
+        )
+        # ventilator demand
+        self.demand_ventilator_height = (self.height - self.stock_height) // 6
+        self.demand_ventilator_width = self.left_width // 4
+        self.demand_ventilator_surface = pygame.Surface((self.stock_ventilator_width, self.stock_ventilator_height))
+        self.demand_ventilator_rect = pygame.Rect(
+            self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
+        )
         
 
     def add_event(self, event):
@@ -154,7 +184,7 @@ class Window:
         textwrap.draw_text(
             self.infobar_surface, 
             cash,
-            colors.WHITE,
+            colors.MONEY_GREEN,
             self.infobar_cash_rect,
             self.info_font,
         )
@@ -211,24 +241,116 @@ class Window:
             self.stock_font
         )
 
-        # Mask demand
+        # antibac demand
         self.demand_antibac_surface.fill(colors.DARK_GRAY)
         demandAntibac = f"Demand: {self.game_data['antibac demand']}"    # Number of demand for
-        if self.game_data['mask stock'] < self.game_data['mask demand']: # Check if stock is lower than demand
+        if self.game_data['antibac stock'] < self.game_data['antibac demand']: # Check if stock is lower than demand
             demandColor = colors.DARK_RED
         else:
             demandColor = colors.MONEY_GREEN
         
         textwrap.draw_text(
-            self.demand_mask_surface,
-            demandMask,
+            self.demand_antibac_surface,
+            demandAntibac,
             demandColor,
-            self.demand_mask_rect,
+            self.demand_antibac_rect,
             self.stock_font
         )
 
+        # visir stock
+        self.stock_visir_surface.fill(colors.DARK_GRAY)
+        stockVisir = f"Visir: {self.game_data['visir stock']}"
+        textwrap.draw_text(
+            self.stock_visir_surface,
+            stockVisir,
+            colors.WHITE,   
+            self.stock_visir_rect,
+            self.stock_font
+        )
+
+        # visir demand
+        self.demand_visir_surface.fill(colors.DARK_GRAY)
+        demandVisir = f"Demand: {self.game_data['visir demand']}"    # Number of demand for
+        if self.game_data['visir stock'] < self.game_data['visir demand']: # Check if stock is lower than demand
+            demandColor = colors.DARK_RED
+        else:
+            demandColor = colors.MONEY_GREEN
+        
+        textwrap.draw_text(
+            self.demand_visir_surface,
+            demandVisir,
+            demandColor,
+            self.demand_visir_rect,
+            self.stock_font
+        )
+
+        # ventilator stock
+        self.stock_ventilator_surface.fill(colors.DARK_GRAY)
+        stockVentilator = f"Ventilator: {self.game_data['ventilator stock']}"
+        textwrap.draw_text(
+            self.stock_ventilator_surface,
+            stockVentilator,
+            colors.WHITE,   
+            self.stock_ventilator_rect,
+            self.stock_font
+        )
+
+        # ventilator demand
+        self.demand_ventilator_surface.fill(colors.DARK_GRAY)
+        demandVentilator = f"Demand: {self.game_data['ventilator demand']}"    # Number of demand for
+        if self.game_data['ventilator stock'] < self.game_data['ventilator demand']: # Check if stock is lower than demand
+            demandColor = colors.DARK_RED
+        else:
+            demandColor = colors.MONEY_GREEN
+        
+        textwrap.draw_text(
+            self.demand_ventilator_surface,
+            demandVentilator,
+            demandColor,
+            self.demand_ventilator_rect,
+            self.stock_font
+        )
+
+        # # glove stock
+        # self.stock_glove_surface.fill(colors.DARK_GRAY)
+        # stockGlove = f"Gloves: {self.game_data['glove stock']}"
+        # textwrap.draw_text(
+        #     self.stock_glove_surface,
+        #     stockGlove,
+        #     colors.WHITE,   
+        #     self.stock_glove_rect,
+        #     self.stock_font
+        # )
+
+        # # glove demand
+        # self.demand_glove_surface.fill(colors.DARK_GRAY)
+        # demandGlove = f"Demand: {self.game_data['glove demand']}"    # Number of demand for
+        # if self.game_data['glove stock'] < self.game_data['glove demand']: # Check if stock is lower than demand
+        #     demandColor = colors.DARK_RED
+        # else:
+        #     demandColor = colors.MONEY_GREEN
+        
+        # textwrap.draw_text(
+        #     self.demand_glove_surface,
+        #     demandGlove,
+        #     demandColor,
+        #     self.demand_glove_rect,
+        #     self.stock_font
+        # )
+
         self.screen.blit(self.stock_surface, (0, self.infobar_height)) # Warehouse
+        # Left side, first column, row 1-3
         self.screen.blit(self.stock_mask_surface, (self.infobar_height, self.infobar_height * 2))   # Mask stock
         self.screen.blit(self.demand_mask_surface, (self.infobar_height, self.infobar_height * 4))  # Mask demand
+        self.screen.blit(self.stock_antibac_surface, (self.infobar_height, self.infobar_height * 6))   # antibac stock
+        self.screen.blit(self.demand_antibac_surface, (self.infobar_height, self.infobar_height * 8))  # antibac demand
+        self.screen.blit(self.stock_visir_surface, (self.infobar_height, self.infobar_height * 10))   # visir stock
+        self.screen.blit(self.demand_visir_surface, (self.infobar_height, self.infobar_height * 12))  # visir demand
+        # Right side, second column, row 1-3
+        self.screen.blit(self.stock_ventilator_surface, (self.left_width//2, self.infobar_height * 2))   # ventilator stock
+        self.screen.blit(self.demand_ventilator_surface, (self.left_width//2, self.infobar_height * 4))  # ventilator demand
+        # self.screen.blit(self.stock_glove_surface, (self.left_width//2, self.infobar_height * 6))   # glove stock
+        # self.screen.blit(self.demand_glove_surface, (self.left_width//2, self.infobar_height * 8))  # glove demand
+
         
         

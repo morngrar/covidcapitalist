@@ -32,12 +32,12 @@ game_data = {
     "toilet-paper demand" : 0,
 
     #price
-    "mask price" : 0,
-    "glove price" : 0,
-    "antibac price" : 0,
-    "visir price" : 0,
-    "ventilator price" : 0,
-    "toilet-paper price" : 0,
+    "mask price" : 5,
+    "glove price" : 7,
+    "antibac price" : 20,
+    "visir price" : 10,
+    "ventilator price" : 300,
+    "toilet-paper price" : 10,
 
     # factories
     "mask factories" : 0,
