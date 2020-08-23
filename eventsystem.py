@@ -61,7 +61,13 @@ class EventStream:
                 {
                     "ventilator stock" : -1,
                 }
-            )
+            ),
+            Event(
+                "A a recent ad-campaign of yours went viral!",
+                {
+                    "renown" : 3,
+                }
+            ),
         ]
 
         # actual initial events
