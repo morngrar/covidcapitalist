@@ -69,7 +69,7 @@ def main():
         (SCREEN_WIDTH, SCREEN_HEIGHT)
     )
 
-    pygame.display.set_caption("COVID Capitalist")
+    pygame.display.set_caption("COVID Capitalist")  
 
 
     from ui.window import Window
@@ -82,6 +82,8 @@ def main():
         {
             "events":EVENT_FONT_SIZE,
             "info": int(EVENT_FONT_SIZE * 1.8),
+            "stock":int(EVENT_FONT_SIZE * 1.6),
+            "title":int(EVENT_FONT_SIZE * 2),
         }
     )
 
@@ -107,8 +109,9 @@ def main():
         # Increase demand and sell stock in intervals
         if deltatime >= 1:
             checkWarehouse(game_data)
-        if deltatime >= 3:
+        if deltatime >= 4:
             deltatime = 0
+            print("called")
             increaseDemand(game_data)               
         
         for event in pygame.event.get():
@@ -131,7 +134,6 @@ def main():
                 if rect.collidepoint(pygame.mouse.get_pos()):
                     if productionsystem.add_factory(game_data, "mask factories"):
                         pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
-
                 # glove factory
                 rect = window.glove_factory.get_rect()
                 rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)

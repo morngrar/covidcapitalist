@@ -11,18 +11,23 @@ def increaseDemand(gameData):
         demand = i
         item = i.split(" ")[0]
         price = gameData[item + ' price']
-        newDemandPercentage = 1 + (random.randrange(1,100)/100)
-        
+        #newDemandPercentage = 1 + (random.randrange(1,100)/100)
+        newDemandPercentage = random.randrange(20, 200)
+
         # We want the demand of pricy items to be lower
         if price > 25:
             newDemandPercentage /= 2
+        if price > 250:
+            newDemandPercentage /= 4
         # Increase the demand
         if gameData[demand] < 1:
             gameData[demand] += 1
-        newFloat = gameData[demand] * newDemandPercentage
+        #newFloat = gameData[demand] * newDemandPercentage
+        #print(i, newDemandPercentage)
+        newFloat = gameData[demand] + newDemandPercentage
     
         newInt = round(newFloat)
-        gameData[demand] += newInt
+        gameData[demand] = newInt
       
         
 

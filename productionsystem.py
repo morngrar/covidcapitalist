@@ -10,10 +10,10 @@ last_time = 0
 factory_cost = {
     "mask factories": 100,
     "glove factories": 500,
-    "antibac factories": 100,
-    "visir factories": 550,
-    "ventilator factories": 1000,
-    "toilet-paper factories": 350,
+    "antibac factories": 1000,
+    "visir factories": 5500,
+    "ventilator factories": 100000,
+    "toilet-paper factories": 3500,
     "moonshiner factories" : 80,
     "childlabor factories": 30,
 }
@@ -24,7 +24,7 @@ factory_production_rate = {
     "glove factories": 10,
     "antibac factories": 10,
     "visir factories": 7,
-    "ventilator factories": 5,
+    "ventilator factories": 3,
     "toilet-paper factories": 15,
     "moonshiner factories": 15,
     "childlabor factories": 5,

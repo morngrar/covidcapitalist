@@ -3,7 +3,7 @@
 import random
 import time
 
-NOTHING_CHANCE = 10
+NOTHING_CHANCE = 20
 EVENT_INTERVAL = 1   # value in seconds
 
 class Event:
