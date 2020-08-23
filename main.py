@@ -91,9 +91,9 @@ def main():
 
     # music
     import os
-    audiopath = os.path.join("audio", "covid capitalist.ogg")
+    bgmusic = os.path.join("audio", "covid capitalist.ogg")
     pygame.mixer.init()
-    pygame.mixer.music.load(audiopath)
+    pygame.mixer.music.load(bgmusic)
     pygame.mixer.music.play(-1, 0.0)
 
 
@@ -174,6 +174,8 @@ def main():
             event = market_events.pick_event()
             if event:
                 if eventsystem.update_game_data(event, game_data):
+                    eventsound = os.path.join("audio", "eventsound.ogg")
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound(eventsound))
                     window.add_event(event)
 
         productionsystem.produce(game_data)
