@@ -2,7 +2,7 @@ import pygame
 from ui import textwrap
 from ui import colors
 
-BG_COLOR = (50, 50, 50)
+BG_COLOR = colors.PRODUCTION_BOX_BG
 BORDER_COLOR = (100, 100, 100)
 FACTORY_XPAD = 10
 FACTORY_YPAD = 10

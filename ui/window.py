@@ -60,21 +60,34 @@ class Window:
         self.production_ypos = self.production_height + self.infobar_height
         self.production_width = self.left_width //3 * 2
         self.production_surface = pygame.Surface((self.production_width, self.production_height))
+
+        # Production title
+        self.production_title_height = self.infobar_height
+        self.production_title_rect = pygame.Rect(
+           self.info_pad, self.info_pad, self.production_width, self.infobar_height
+        )
+
+        self.production_box_height = (self.production_height - self.production_title_height) // 3
+        self.production_box_dimensions = (self.left_width // 3, self.production_box_height)
         
         self.mask_factory = FactoryBox(
-            self.production_surface, 
-            (self.left_width // 3, self.production_height // 3), 
+            self.production_surface,
+            self.production_box_dimensions, 
             "Mask Factories", 
             self.info_font, 
             pos=(0, 0)
-            )
+        )
         
-        self.glove_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Glove Factories", self.info_font, pos=(0, self.production_height // 3))
-        self.antibac_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Antibac Factories", self.info_font, pos=(0, (self.production_height // 3) * 2 ))
-        self.visir_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Visir Factories", self.info_font, pos=(self.left_width // 3, 0))
-        self.ventilator_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Ventilator Factories", self.info_font, pos=(self.left_width // 3, self.production_height // 3))
-        self.toilet_paper_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Toilet paper Factories", self.info_font, pos=(self.left_width // 3, (self.production_height // 3) * 2 ))
+        self.glove_factory = FactoryBox(self.production_surface, self.production_box_dimensions, "Glove Factories", self.info_font, pos=(0, self.production_box_height))
+        self.antibac_factory = FactoryBox(self.production_surface, self.production_box_dimensions, "Antibac Factories", self.info_font, pos=(0, self.production_box_height * 2))
+        self.visir_factory = FactoryBox(self.production_surface, self.production_box_dimensions, "Visir Factories", self.info_font, pos=(self.left_width // 3, 0))
+        self.ventilator_factory = FactoryBox(self.production_surface, self.production_box_dimensions, "Ventilator Factories", self.info_font, pos=(self.left_width // 3, self.production_box_height))
+        self.toilet_paper_factory = FactoryBox(self.production_surface, self.production_box_dimensions, "Toilet paper Factories", self.info_font, pos=(self.left_width // 3, self.production_box_height * 2 ))
 
+        for e in [
+            self.mask_factory, self.glove_factory, self.antibac_factory, self.visir_factory, self.ventilator_factory, self.toilet_paper_factory
+        ]:
+            e.pos = (e.pos[0], e.pos[1]+self.production_title_height)
 
         # Off-the-books area
         self.offbooks_height = self.production_height
@@ -162,6 +175,16 @@ class Window:
         self.screen.blit(self.infobar_surface, (0, 0))
 
         # Production Area
+        self.production_surface.fill(colors.PRODUCTION_BG)
+        textwrap.draw_text(
+            self.production_surface,
+            "Factories (click to buy more)",
+            colors.WHITE,
+            self.production_title_rect,
+            self.info_font,
+        )
+
+
         # Mask
         self.mask_factory.production = self.game_data["mask factories"] * self.production_rate["mask factories"]
         self.mask_factory.cost = self.production_cost["mask factories"]
