@@ -171,34 +171,36 @@ def main():
                 rect = window.offbooks_moonshiners.get_rect()
                 rect = pygame.Rect(window.offbooks_xpos + rect.x, window.offbooks_ypos + rect.y, rect.width, rect.height)
                 if rect.collidepoint(pygame.mouse.get_pos()):
-                    productionsystem.add_factory(game_data, "moonshiner factories")
-                    market_events.add(
-                        eventsystem.Event(
-                            "A documentary revealed one of your moonshiner connections! They had to shut down!",
-                            {
-                                "renown": -5,
-                                "moonshiner factories": -1
-                            },
-                            oneoff=True
+                    if productionsystem.add_factory(game_data, "moonshiner factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
+                        market_events.add(
+                            eventsystem.Event(
+                                "A documentary revealed one of your moonshiner connections! They had to shut down!",
+                                {
+                                    "renown": -5,
+                                    "moonshiner factories": -1
+                                },
+                                oneoff=True
+                            )
                         )
-                    )
 
 
                 #child labor
                 rect = window.offbooks_child_labor.get_rect()
                 rect = pygame.Rect(window.offbooks_xpos + rect.x, window.offbooks_ypos + rect.y, rect.width, rect.height)
                 if rect.collidepoint(pygame.mouse.get_pos()):
-                    productionsystem.add_factory(game_data, "childlabor factories")
-                    market_events.add(
-                        eventsystem.Event(
-                            "A documentary revealed one of your child labor facilities! It had to be shut down!",
-                            {
-                                "renown": -10,
-                                "childlabor factories": -1
-                            },
-                            oneoff=True
+                    if productionsystem.add_factory(game_data, "childlabor factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
+                        market_events.add(
+                            eventsystem.Event(
+                                "A documentary revealed one of your child labor facilities! It had to be shut down!",
+                                {
+                                    "renown": -10,
+                                    "childlabor factories": -1
+                                },
+                                oneoff=True
+                            )
                         )
-                    )
 
         if market_events.time_for_event():
             event = market_events.pick_event()
