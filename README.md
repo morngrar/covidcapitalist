@@ -1,6 +1,8 @@
 # COVID Capitalist
 48h jam based on Weekly Game Jam week 163, from a team of three. The theme: **Tycoon**
 
+In the game, you take the role of a shady capitalist without scruples who has decided to earn a profit on the Covid-19 pandemic.
+
 ## Installing
 The game has two dependencies. Python 3 and the module `pygame`.
 
