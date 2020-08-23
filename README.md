@@ -23,7 +23,7 @@ Clone the repo and run the `main.py` file, either by double-clicking or running 
         py main.py
 
 ### Linux
-Clone the repo and run `main-py` from that directory.
+Clone the repo and run `main.py` from that directory.
 
 If your distro is modern, python 3 should be your default python instance, and `python main.py` should work.
 
