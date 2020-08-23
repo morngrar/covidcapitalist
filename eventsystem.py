@@ -24,31 +24,61 @@ class EventStream:
             Event(
                 "A toilet-paper warehouse in Tulpa burned down! Demand +2000",
                 {
-                    "toilet-paper demand" : 2000,
+                    "toilet-paper demand" : 200,
                 }
             ),
             Event(
                 "A toilet-paper warehouse in Stockholm burned down! Demand +500",
                 {
-                    "toilet-paper demand" : 500,
+                    "toilet-paper demand" : 50,
                 }
             ),
             Event(
                 "A toilet-paper warehouse in Rome burned down! Demand +1000",
                 {
-                    "toilet-paper demand" : 1000,
+                    "toilet-paper demand" : 100,
                 }
             ),
             Event(
                 "A toilet-paper warehouse in Raufoss burned down! Demand +1500",
                 {
-                    "toilet-paper demand" : 1500,
+                    "toilet-paper demand" : 150,
+                }
+            ),
+            Event(
+                "Stock decreased in value! You lose $30000",
+                {
+                    "cash" : 30000,
+                }
+            ),
+            Event(
+                "Stock decreased in value! You lose $10000",
+                {
+                    "cash" : 10000,
                 }
             ),
             Event(
                 "One of your mask factories was destroyed during a conspiracy-theorist attack!",
                 {
                     "mask factories" : -1,
+                }
+            ),
+            Event(
+                "One of your antibac factories exploded!",
+                {
+                    "antibac factories" : -1,
+                }
+            ),
+            Event(
+                "One of your ventilator factories burned down!",
+                {
+                    "ventilator factories" : -1,
+                }
+            ),
+            Event(
+                "One of your toilet paper factories !",
+                {
+                    "ventilator factories" : -1,
                 }
             ),
             Event(
