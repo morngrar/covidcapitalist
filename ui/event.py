@@ -3,8 +3,8 @@ import time
 from ui import textwrap
 from ui import colors
 
-BG_COLOR = (50, 50, 50)
-BORDER_COLOR = (100, 100, 100)
+BG_COLOR = colors.EVENT_BOX_BG
+BORDER_COLOR = colors.EVENT_BOX_BORDER
 
 EVENT_XPAD = 10
 EVENT_YPAD = 10

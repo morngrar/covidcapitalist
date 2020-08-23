@@ -130,7 +130,7 @@ class EventStream:
                 }
             ),
             Event(
-                "Your ventilators are extremely popular!",
+                "Greece needs many ventilators for their new emergency hospital!",
                 {
                     "ventilator demand" : 100,
                 }

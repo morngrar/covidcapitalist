@@ -141,10 +141,10 @@ class Window:
     def draw(self):
         # remove oldest event if old
         if self.event_list:
-            if time.time() - self.event_list[0].created > 3:
+            if time.time() - self.event_list[0].created > 4:
                 self.pop_event()
 
-        self.event_surface.fill(colors.DARKER_GRAY)
+        self.event_surface.fill(colors.EVENT_BG)
 
         # Add event area at right edge of screen
         for i in range(len(self.event_list)):
