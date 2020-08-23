@@ -91,9 +91,11 @@ def main():
 
     # music
     import os
-    audiopath = os.path.join("audio", "covid capitalist.ogg")
+    bgmusic = os.path.join("audio", "covid capitalist.ogg")
+    factoryshopsound = os.path.join("audio", "8-bit-powerup_01.ogg")
+    eventsound = os.path.join("audio", "eventsound.ogg")
     pygame.mixer.init()
-    pygame.mixer.music.load(audiopath)
+    pygame.mixer.music.load(bgmusic)
     pygame.mixer.music.play(-1, 0.0)
 
 
@@ -132,48 +134,55 @@ def main():
                 rect = window.mask_factory.get_rect()
                 rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
                 if rect.collidepoint(pygame.mouse.get_pos()):
-                    productionsystem.add_factory(game_data, "mask factories")
+                    if productionsystem.add_factory(game_data, "mask factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
                     print(pygame.mouse.get_pos())
                 
                 # glove factory
                 rect = window.glove_factory.get_rect()
                 rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
                 if rect.collidepoint(pygame.mouse.get_pos()):
-                    productionsystem.add_factory(game_data, "glove factories")
+                    if productionsystem.add_factory(game_data, "glove factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
                     print(pygame.mouse.get_pos())
 
                 # antibac factory
                 rect = window.antibac_factory.get_rect()
                 rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
                 if rect.collidepoint(pygame.mouse.get_pos()):
-                    productionsystem.add_factory(game_data, "antibac factories")
+                    if productionsystem.add_factory(game_data, "antibac factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
                     print(pygame.mouse.get_pos())
 
                 # visir factory
                 rect = window.visir_factory.get_rect()
                 rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
                 if rect.collidepoint(pygame.mouse.get_pos()):
-                    productionsystem.add_factory(game_data, "visir factories")
+                    if productionsystem.add_factory(game_data, "visir factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
                     print(pygame.mouse.get_pos())
 
                 # ventilator factory
                 rect = window.ventilator_factory.get_rect()
                 rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
                 if rect.collidepoint(pygame.mouse.get_pos()):
-                    productionsystem.add_factory(game_data, "ventilator factories")
+                    if productionsystem.add_factory(game_data, "ventilator factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
                     print(pygame.mouse.get_pos())
 
                 # toilet-paper factory
                 rect = window.toilet_paper_factory.get_rect()
                 rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
                 if rect.collidepoint(pygame.mouse.get_pos()):
-                    productionsystem.add_factory(game_data, "toilet-paper factories")
+                    if productionsystem.add_factory(game_data, "toilet-paper factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
                     print(pygame.mouse.get_pos())
 
         if market_events.time_for_event():
             event = market_events.pick_event()
             if event:
                 if eventsystem.update_game_data(event, game_data):
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound(eventsound))
                     window.add_event(event)
 
         productionsystem.produce(game_data)
