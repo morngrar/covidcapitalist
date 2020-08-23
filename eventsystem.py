@@ -22,9 +22,27 @@ class EventStream:
         # built-in events
         self.events += [
             Event(
-                "A toilet-paper warehouse in Tulpa burned down!",
+                "A toilet-paper warehouse in Tulpa burned down! Demand +2000",
                 {
                     "toilet-paper demand" : 2000,
+                }
+            ),
+            Event(
+                "A toilet-paper warehouse in Stockholm burned down! Demand +500",
+                {
+                    "toilet-paper demand" : 500,
+                }
+            ),
+            Event(
+                "A toilet-paper warehouse in Rome burned down! Demand +1000",
+                {
+                    "toilet-paper demand" : 1000,
+                }
+            ),
+            Event(
+                "A toilet-paper warehouse in Raufoss burned down! Demand +1500",
+                {
+                    "toilet-paper demand" : 1500,
                 }
             ),
             Event(
@@ -34,25 +52,25 @@ class EventStream:
                 }
             ),
             Event(
-                "Some gloves got lost in transport!",
+                "Some gloves got lost in transport! Glove stock -100",
                 {
-                    "glove stock" : -50,
+                    "glove stock" : -100,
                 }
             ),
             Event(
-                "Some masks got lost in transport!",
+                "Some masks got lost in transport! Mask stock -50",
                 {
-                    "mask stock" : -100,
+                    "mask stock" : -50,
                 }
             ),
             Event(
-                "Some antibac got lost in transport!",
+                "Some antibac got lost in transport! Antibac stock -25",
                 {
                     "antibac stock" : -25,
                 }
             ),
             Event(
-                "Some visirs got lost in transport!",
+                "Some visirs got lost in transport! Visir stock -30",
                 {
                     "visir stock" : -30,
                 }
@@ -64,9 +82,27 @@ class EventStream:
                 }
             ),
             Event(
-                "A a recent ad-campaign of yours went viral!",
+                "A a recent ad-campaign of yours went viral! Renown +3%",
                 {
                     "renown" : 3,
+                }
+            ),
+            Event(
+                "Anti-maskers are spreading their fake news! Mask demand -5000",
+                {
+                    "mask demand" : -5000,
+                }
+            ),
+            Event(
+                "Soap producers claim soap is more effective than antibac! Antibac demand -3000",
+                {
+                    "antibac demand" : -3000,
+                }
+            ),
+            Event(
+                "Your ventilators are extremely popular!",
+                {
+                    "ventilator demand" : +100,
                 }
             ),
         ]
