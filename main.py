@@ -96,9 +96,6 @@ def main():
     pygame.mixer.music.load(audiopath)
     pygame.mixer.music.play(-1, 0.0)
 
-
-
-
     running = True
     while running:
         global deltatime
