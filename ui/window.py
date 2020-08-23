@@ -156,10 +156,6 @@ class Window:
         self.demand_toilet_paper_rect = pygame.Rect(
             self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
         )
-        
-        self.stock_surface = pygame.Surface(self.stock_width, self.stock_height)
-        self.stock_pos = (height + (height//19), 0)
-        
 
         # production area
         self.production_cost = None
