@@ -314,9 +314,9 @@ class Window:
         self.demand_mask_surface.fill(colors.DARK_GRAY)
         demandMask = f"Demand: {self.game_data['mask demand']}"    # Number of demand for
         if self.game_data['mask stock'] < self.game_data['mask demand']: # Check if stock is lower than demand
-            demandColor = colors.DARK_RED
-        else:
             demandColor = colors.MONEY_GREEN
+        else:
+            demandColor = colors.DARK_RED
         
         textwrap.draw_text(
             self.demand_mask_surface,
@@ -341,9 +341,9 @@ class Window:
         self.demand_antibac_surface.fill(colors.DARK_GRAY)
         demandAntibac = f"Demand: {self.game_data['antibac demand']}"    # Number of demand for
         if self.game_data['antibac stock'] < self.game_data['antibac demand']: # Check if stock is lower than demand
-            demandColor = colors.DARK_RED
-        else:
             demandColor = colors.MONEY_GREEN
+        else:
+            demandColor = colors.DARK_RED
         
         textwrap.draw_text(
             self.demand_antibac_surface,
@@ -368,9 +368,9 @@ class Window:
         self.demand_visir_surface.fill(colors.DARK_GRAY)
         demandVisir = f"Demand: {self.game_data['visir demand']}"    # Number of demand for
         if self.game_data['visir stock'] < self.game_data['visir demand']: # Check if stock is lower than demand
-            demandColor = colors.DARK_RED
-        else:
             demandColor = colors.MONEY_GREEN
+        else:
+            demandColor = colors.DARK_RED
         
         textwrap.draw_text(
             self.demand_visir_surface,
@@ -395,9 +395,9 @@ class Window:
         self.demand_ventilator_surface.fill(colors.DARK_GRAY)
         demandVentilator = f"Demand: {self.game_data['ventilator demand']}"    # Number of demand for
         if self.game_data['ventilator stock'] < self.game_data['ventilator demand']: # Check if stock is lower than demand
-            demandColor = colors.DARK_RED
-        else:
             demandColor = colors.MONEY_GREEN
+        else:
+            demandColor = colors.DARK_RED
         
         textwrap.draw_text(
             self.demand_ventilator_surface,
@@ -422,9 +422,9 @@ class Window:
         self.demand_glove_surface.fill(colors.DARK_GRAY)
         demandGlove = f"Demand: {self.game_data['glove demand']}"    # Number of demand for
         if self.game_data['glove stock'] < self.game_data['glove demand']: # Check if stock is lower than demand
-            demandColor = colors.DARK_RED
-        else:
             demandColor = colors.MONEY_GREEN
+        else:
+            demandColor = colors.DARK_RED
         
         textwrap.draw_text(
             self.demand_glove_surface,
@@ -449,9 +449,9 @@ class Window:
         self.demand_toilet_paper_surface.fill(colors.DARK_GRAY)
         demandTP = f"Demand: {self.game_data['toilet-paper demand']}"    # Number of demand for
         if self.game_data['toilet-paper stock'] < self.game_data['toilet-paper demand']: # Check if stock is lower than demand
-            demandColor = colors.DARK_RED
-        else:
             demandColor = colors.MONEY_GREEN
+        else:
+            demandColor = colors.DARK_RED
         
         textwrap.draw_text(
             self.demand_toilet_paper_surface,
