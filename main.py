@@ -1,7 +1,7 @@
 import time
 import pygame
 from warehouse import checkWarehouse, increaseDemand
-from productionsystem import produce
+import productionsystem
 import eventsystem
 
 
@@ -46,10 +46,8 @@ game_data = {
     "visir factories" : 0,
     "ventilator factories" : 0,
     "toilet-paper factories" : 0,
-
-
-    # off the books production
-    "moonshine producers" : 0,
+    "moonshiner factories": 0,
+    "childlabor factories": 0,
 }
 
 def main():
@@ -87,6 +85,16 @@ def main():
         }
     )
 
+    window.update_production_data(productionsystem.factory_cost, productionsystem.factory_production_rate)
+
+    # music
+    import os
+    bgmusic = os.path.join("audio", "covid capitalist.ogg")
+    factoryshopsound = os.path.join("audio", "8-bit-powerup_01.ogg")
+    eventsound = os.path.join("audio", "eventsound.ogg")
+    pygame.mixer.init()
+    pygame.mixer.music.load(bgmusic)
+    pygame.mixer.music.play(-1, 0.0)
 
     running = True
     while running:
@@ -115,14 +123,99 @@ def main():
                     factories = [key for key in game_data.keys() if "factories" in key]
                     for k in factories:
                         game_data[k] += 1
-        
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                
+                # mask factory
+                rect = window.mask_factory.get_rect()
+                rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    if productionsystem.add_factory(game_data, "mask factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
+                    print(pygame.mouse.get_pos())
+                
+                # glove factory
+                rect = window.glove_factory.get_rect()
+                rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    if productionsystem.add_factory(game_data, "glove factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
+                    print(pygame.mouse.get_pos())
+
+                # antibac factory
+                rect = window.antibac_factory.get_rect()
+                rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    if productionsystem.add_factory(game_data, "antibac factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
+                    print(pygame.mouse.get_pos())
+
+                # visir factory
+                rect = window.visir_factory.get_rect()
+                rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    if productionsystem.add_factory(game_data, "visir factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
+                    print(pygame.mouse.get_pos())
+
+                # ventilator factory
+                rect = window.ventilator_factory.get_rect()
+                rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    if productionsystem.add_factory(game_data, "ventilator factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
+                    print(pygame.mouse.get_pos())
+
+                # toilet-paper factory
+                rect = window.toilet_paper_factory.get_rect()
+                rect = pygame.Rect(rect.x, window.production_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    if productionsystem.add_factory(game_data, "toilet-paper factories"):
+                        pygame.mixer.Channel(2).play(pygame.mixer.Sound(factoryshopsound))
+                    print(pygame.mouse.get_pos())
+
+                # moonshiners
+                rect = window.offbooks_moonshiners.get_rect()
+                rect = pygame.Rect(window.offbooks_xpos + rect.x, window.offbooks_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    productionsystem.add_factory(game_data, "moonshiner factories")
+                    market_events.add(
+                        eventsystem.Event(
+                            "A documentary revealed one of your moonshiner connections! They had to shut down!",
+                            {
+                                "renown": -5,
+                                "moonshiner factories": -1
+                            },
+                            oneoff=True
+                        )
+                    )
+
+
+                #child labor
+                rect = window.offbooks_child_labor.get_rect()
+                rect = pygame.Rect(window.offbooks_xpos + rect.x, window.offbooks_ypos + rect.y, rect.width, rect.height)
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    productionsystem.add_factory(game_data, "childlabor factories")
+                    market_events.add(
+                        eventsystem.Event(
+                            "A documentary revealed one of your child labor facilities! It had to be shut down!",
+                            {
+                                "renown": -10,
+                                "childlabor factories": -1
+                            },
+                            oneoff=True
+                        )
+                    )
+
         if market_events.time_for_event():
             event = market_events.pick_event()
             if event:
                 if eventsystem.update_game_data(event, game_data):
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound(eventsound))
                     window.add_event(event)
 
-        produce(game_data)
+        productionsystem.produce(game_data)
+
+
         window.update_gamedata(game_data)
         window.draw()
         pygame.display.update()

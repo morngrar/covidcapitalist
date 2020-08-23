@@ -1,9 +1,13 @@
 import pygame
 
+
 class Widget:
-    def __init__(self, rect):
-        self.rect = pygame.Rect(rect)
-        self.surface = pygame.Surface(rect.width, rect.height)
+    def __init__(self, width, height):
+        self.surface = pygame.Surface(width, height)
+        self.body()
 
     def draw(self, surface, pos):
         surface.blit(self.surface, pos)
+
+    def body(self):
+        pass
