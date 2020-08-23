@@ -61,28 +61,27 @@ class FactoryBox:
         pygame.draw.rect(self.surface, BG_COLOR, inner)
 
         textwrap.draw_text(
-            self.surface, 
-            self.title, 
-            colors.WHITE, 
+            self.surface,
+            self.title,
+            colors.WHITE,
             title_box,
             self.font,
         )
 
         textwrap.draw_text(
-            self.surface, 
+            self.surface,
             f"Produces: {self.production}",
-            colors.WHITE, 
+            colors.WHITE,
             production_box,
             self.font,
         )
 
         textwrap.draw_text(
-            self.surface, 
+            self.surface,
             f"Cost: {self.cost}",
-            colors.WHITE, 
+            colors.WHITE,
             cost_box,
             self.font,
         )
 
         self.parent_surface.blit(self.surface, self.pos)
-

@@ -7,6 +7,7 @@ from ui import colors
 from ui import textwrap
 from ui.factory import FactoryBox
 
+
 class Window:
     def __init__(self, screen, width, height, fontsizes):
         self.screen = screen
@@ -43,7 +44,7 @@ class Window:
         self.infobar_cash_rect = pygame.Rect(
             (
                 renown_width,
-                self.info_pad, 
+                self.info_pad,
                 self.left_width - (self.left_width // 4),
                 self.infobar_height
             )
@@ -56,20 +57,20 @@ class Window:
         self.production_height = (height - self.infobar_height) // 2
         self.production_ypos = self.production_height
         self.production_surface = pygame.Surface((self.left_width, self.production_height))
-        
+
         self.mask_factory = FactoryBox(
-            self.production_surface, 
-            (self.left_width // 3, self.production_height // 3), 
-            "Mask Factories", 
-            self.info_font, 
+            self.production_surface,
+            (self.left_width // 3, self.production_height // 3),
+            "Mask Factories",
+            self.info_font,
             pos=(0, 0)
             )
-        
+
         self.glove_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Glove Factories", self.info_font, pos=(0, self.production_height // 3))
-        self.antibac_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Antibac Factories", self.info_font, pos=(0, (self.production_height // 3) * 2 ))
+        self.antibac_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Antibac Factories", self.info_font, pos=(0, (self.production_height // 3) * 2))
         self.visir_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Visir Factories", self.info_font, pos=(self.left_width // 3, 0))
         self.ventilator_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Ventilator Factories", self.info_font, pos=(self.left_width // 3, self.production_height // 3))
-        self.toilet_paper_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Toilet paper Factories", self.info_font, pos=(self.left_width // 3, (self.production_height // 3) * 2 ))
+        self.toilet_paper_factory = FactoryBox(self.production_surface, (self.left_width // 3, self.production_height // 3), "Toilet paper Factories", self.info_font, pos=(self.left_width // 3, (self.production_height // 3) * 2))
 
     def add_event(self, event):
         self.event_list.append(
@@ -80,7 +81,7 @@ class Window:
                 self.event_font
             )
         )
-    
+
     def pop_event(self):
         """Removes oldest event and blacks event area"""
         self.event_list = self.event_list[1:]
@@ -88,7 +89,6 @@ class Window:
 
     def update_gamedata(self, data):
         self.game_data = data
-
 
     def draw(self):
         # remove oldest event if old
@@ -100,7 +100,7 @@ class Window:
 
         # Add event area at right edge of screen
         for i in range(len(self.event_list)):
-            if i > 10: # max 10 events on screen
+            if i > 10:  # max 10 events on screen
                 break
             self.event_list[i].pos = (0, self.event_height*i)
             self.event_list[i].draw()
@@ -116,7 +116,7 @@ class Window:
             cash = f"Cash: ${self.game_data['cash']}"
 
         textwrap.draw_text(
-            self.infobar_surface, 
+            self.infobar_surface,
             renown,
             colors.WHITE,
             self.infobar_renown_rect,
@@ -124,7 +124,7 @@ class Window:
         )
 
         textwrap.draw_text(
-            self.infobar_surface, 
+            self.infobar_surface,
             cash,
             colors.WHITE,
             self.infobar_cash_rect,

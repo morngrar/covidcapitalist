@@ -43,12 +43,10 @@ def produce(game_data):
     deltatime += now - last_time
     last_time = now
     factory_keys = [key for key in game_data.keys() if 'factories' in key]
-    stock_keys = [key for key in game_data.keys() if 'stock' in key]
 
     if deltatime >= 1:
         deltatime = 0
 
         for factory in factory_keys:
-        
             item = factory.split()[0] + " stock"
-            game_data[item] += factory_production_rate[factory] * game_data[factory] # Add to stock
+            game_data[item] += factory_production_rate[factory] * game_data[factory]  # Add to stock
