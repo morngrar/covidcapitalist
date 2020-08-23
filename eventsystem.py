@@ -22,25 +22,25 @@ class EventStream:
         # built-in events
         self.events += [
             Event(
-                "A toilet-paper warehouse in Tulpa burned down! Demand +2000",
+                "A toilet-paper warehouse in Tulpa burned down! Demand +200",
                 {
                     "toilet-paper demand" : 200,
                 }
             ),
             Event(
-                "A toilet-paper warehouse in Stockholm burned down! Demand +500",
+                "A toilet-paper warehouse in Stockholm burned down! Demand +50",
                 {
                     "toilet-paper demand" : 50,
                 }
             ),
             Event(
-                "A toilet-paper warehouse in Rome burned down! Demand +1000",
+                "A toilet-paper warehouse in Rome burned down! Demand +100",
                 {
                     "toilet-paper demand" : 100,
                 }
             ),
             Event(
-                "A toilet-paper warehouse in Raufoss burned down! Demand +1500",
+                "A toilet-paper warehouse in Raufoss burned down! Demand +150",
                 {
                     "toilet-paper demand" : 150,
                 }
@@ -48,13 +48,13 @@ class EventStream:
             Event(
                 "Stock decreased in value! You lose $30000",
                 {
-                    "cash" : 30000,
+                    "cash" : -30000,
                 }
             ),
             Event(
                 "Stock decreased in value! You lose $10000",
                 {
-                    "cash" : 10000,
+                    "cash" : -10000,
                 }
             ),
             Event(
@@ -132,7 +132,7 @@ class EventStream:
             Event(
                 "Your ventilators are extremely popular!",
                 {
-                    "ventilator demand" : +100,
+                    "ventilator demand" : 100,
                 }
             ),
         ]
