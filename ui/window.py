@@ -66,6 +66,35 @@ class Window:
         self.stock_title_rect = pygame.Rect(
             self.info_pad, self.info_pad, self.left_width, self.infobar_height * 2
         )
+
+        # Mask stock
+        self.stock_mask_height = (self.height - self.stock_height) // 6
+        self.stock_mask_width = self.left_width // 4
+        self.stock_mask_surface = pygame.Surface((self.stock_mask_width, self.stock_mask_height))
+        self.stock_mask_rect = pygame.Rect(
+            self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
+        )
+        # Mask demand
+        self.demand_mask_height = (self.height - self.stock_height) // 6
+        self.demand_mask_width = self.left_width // 4
+        self.demand_mask_surface = pygame.Surface((self.stock_mask_width, self.stock_mask_height))
+        self.demand_mask_rect = pygame.Rect(
+            self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
+        )
+        # antibac stock
+        self.stock_antibac_height = (self.height - self.stock_height) // 6
+        self.stock_antibac_width = self.left_width // 4
+        self.stock_antibac_surface = pygame.Surface((self.stock_antibac_width, self.stock_antibac_height))
+        self.stock_antibac_rect = pygame.Rect(
+            self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
+        )
+        # antibac demand
+        self.demand_antibac_height = (self.height - self.stock_height) // 6
+        self.demand_antibac_width = self.left_width // 4
+        self.demand_antibac_surface = pygame.Surface((self.stock_antibac_width, self.stock_antibac_height))
+        self.demand_antibac_rect = pygame.Rect(
+            self.info_pad, self.info_pad, self.stock_mask_width, self.infobar_height
+        )
         
 
     def add_event(self, event):
@@ -86,8 +115,8 @@ class Window:
     def update_gamedata(self, data):
         self.game_data = data
 
-
     def draw(self):
+
         # remove oldest event if old
         if self.event_list:
             if time.time() - self.event_list[0].created > 3:
@@ -143,5 +172,63 @@ class Window:
             self.stock_title_rect,
             self.stock_title_font,
         )
+
+        # Mask stock
+        self.stock_mask_surface.fill(colors.DARK_GRAY)
+        stockMask = f"Masks: {self.game_data['mask stock']}"
+        textwrap.draw_text(
+            self.stock_mask_surface,
+            stockMask,
+            colors.WHITE,
+            self.stock_mask_rect,
+            self.stock_font
+        )
+
+        # Mask demand
+        self.demand_mask_surface.fill(colors.DARK_GRAY)
+        demandMask = f"Demand: {self.game_data['mask demand']}"    # Number of demand for
+        if self.game_data['mask stock'] < self.game_data['mask demand']: # Check if stock is lower than demand
+            demandColor = colors.DARK_RED
+        else:
+            demandColor = colors.MONEY_GREEN
         
-        self.screen.blit(self.stock_surface, (0, self.infobar_height))
+        textwrap.draw_text(
+            self.demand_mask_surface,
+            demandMask,
+            demandColor,
+            self.demand_mask_rect,
+            self.stock_font
+        )
+        
+        # antibac stock
+        self.stock_antibac_surface.fill(colors.DARK_GRAY)
+        stockAntibac = f"Antibac: {self.game_data['antibac stock']}"
+        textwrap.draw_text(
+            self.stock_antibac_surface,
+            stockAntibac,
+            colors.WHITE,
+            self.stock_antibac_rect,
+            self.stock_font
+        )
+
+        # Mask demand
+        self.demand_antibac_surface.fill(colors.DARK_GRAY)
+        demandAntibac = f"Demand: {self.game_data['antibac demand']}"    # Number of demand for
+        if self.game_data['mask stock'] < self.game_data['mask demand']: # Check if stock is lower than demand
+            demandColor = colors.DARK_RED
+        else:
+            demandColor = colors.MONEY_GREEN
+        
+        textwrap.draw_text(
+            self.demand_mask_surface,
+            demandMask,
+            demandColor,
+            self.demand_mask_rect,
+            self.stock_font
+        )
+
+        self.screen.blit(self.stock_surface, (0, self.infobar_height)) # Warehouse
+        self.screen.blit(self.stock_mask_surface, (self.infobar_height, self.infobar_height * 2))   # Mask stock
+        self.screen.blit(self.demand_mask_surface, (self.infobar_height, self.infobar_height * 4))  # Mask demand
+        
+        

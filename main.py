@@ -71,7 +71,7 @@ def main():
         (SCREEN_WIDTH, SCREEN_HEIGHT)
     )
 
-    pygame.display.set_caption("COVID Capitalist")
+    pygame.display.set_caption("COVID Capitalist")  
 
 
     from ui.window import Window
@@ -84,7 +84,7 @@ def main():
         {
             "events":EVENT_FONT_SIZE,
             "info": int(EVENT_FONT_SIZE * 1.8),
-            "stock":int(EVENT_FONT_SIZE * 2.0),
+            "stock":int(EVENT_FONT_SIZE * 1.6),
             "title":int(EVENT_FONT_SIZE * 2),
         }
     )
@@ -101,7 +101,7 @@ def main():
         # Increase demand and sell stock in intervals
         if deltatime >= 1:
             checkWarehouse(game_data)
-        if deltatime >= 3:
+        if deltatime >= 2:
             deltatime = 0
             increaseDemand(game_data)               
         
